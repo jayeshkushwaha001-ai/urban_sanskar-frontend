@@ -6,6 +6,9 @@
     --font-brand-serif: 'Playfair Display', serif;
     /* For that sharp Roman Wordmark look */
     --font-brand-sans: 'Inter', sans-serif;
+    /* For clean structural data */
+
+    /* Logo-inspired Color Palette */
     --canvas-bg: #e8e7e3;
     --ink-primary: #111111;
     --ink-secondary: #555555;
@@ -146,14 +149,24 @@ a {
 }
 
 .brand-name {
-    font-family: var(--font-brand-serif-serif);
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    line-height: 1;
-    margin-right: -0.25em;
-    white-space: nowrap;
-    transition: var(--speed-premium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Logo ko center mein rakhne ke liye */
+    margin: 0;
+    padding: 0;
+}
+
+.logo-svg {
+    height: 25px;
+    
+    width: auto;
+    /* Isse width apne aap sahi ratio mein adjust ho jayegi */
+    display: block;
+
+    /* ⚠️ IMPORTANT TIP: Agar website ka header BLACK/DARK rang ka hai, 
+       toh niche waali line ka comment hata dena (uncomment kar dena) */
+    /* filter: invert(1); */
 }
 
 /* Right Actions Configuration */
