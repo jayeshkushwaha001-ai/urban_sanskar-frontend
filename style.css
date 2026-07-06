@@ -6,9 +6,6 @@
     --font-brand-serif: 'Playfair Display', serif;
     /* For that sharp Roman Wordmark look */
     --font-brand-sans: 'Inter', sans-serif;
-    /* For clean structural data */
-
-    /* Logo-inspired Color Palette */
     --canvas-bg: #e8e7e3;
     --ink-primary: #111111;
     --ink-secondary: #555555;
@@ -149,7 +146,7 @@ a {
 }
 
 .brand-name {
-    font-family: var(--font-serif);
+    font-family: var(--font-brand-serif-serif);
     font-size: 1.6rem;
     font-weight: 400;
     letter-spacing: 0.25em;
@@ -639,9 +636,16 @@ a {
         width: 100%;
     }
 
+    /* 🔥 FIXED: Height ko 420px se 'auto' kiya taaki container image ke hisab se adjust ho */
     .cat-image-wrapper {
-        height: 420px;
-        /* Perfect golden ratio portrait scaling on mobile viewports */
+        height: auto;
+    }
+
+    /* 🔥 FIXED: Image ko natural scale par laya aur object-fit contain kiya taaki CUT na ho */
+    .cat-image-wrapper .cat-display-img {
+        height: auto;
+        width: 100%;
+        object-fit: contain;
     }
 
     .cat-info-wrapper {
@@ -965,7 +969,7 @@ a {
     width: 100%;
     max-width: 300px;
     box-sizing: border-box;
-     display: inline-block;
+    display: inline-block;
     text-align: center;
 }
 
