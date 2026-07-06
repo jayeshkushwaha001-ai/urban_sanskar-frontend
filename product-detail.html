@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Ivory Co-ord Set | Urban Sanskar</title>
+    <!-- Standard CSS Stylesheet Linking -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="canvas-variant-bg">
+
+
+    <!-- 1. Top Luxury Announcement Bar -->
+    <div class="announcement-bar">
+        <span>FREE SHIPPING-ORDERS ABOVE ₹4999/-. PAN INDIA SHIPPING</span>
+    </div>
+
+    <!-- 2. Master Header / Navbar -->
+    <header class="main-header">
+
+        <!-- Left Section: Desktop Navigation Links / Mobile Hamburger -->
+        <div class="header-col nav-left">
+            <!-- Mobile Hamburger (Hidden on Desktop) -->
+            <button class="menu-toggle-btn" id="menu-open-btn" aria-label="Open Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <line x1="4" y1="7" x2="20" y2="7"></line>
+                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                    <line x1="4" y1="17" x2="20" y2="17"></line>
+                </svg>
+            </button>
+
+            <!-- Desktop Menu -->
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link">Shop</a>
+                <a href="collections.html" class="nav-link">All Collections</a>
+                <a href="about.html" class="nav-link">Our Story</a>
+            </nav>
+        </div>
+
+        <!-- Center Section: Stacked Circle Logo & Brand Name -->
+        <div class="header-col nav-center">
+            <div class="brand-identity">
+                <div class="logo-circle-container">
+                    <img src="logo.jpg" alt="Urban Sanskar Logo" class="brand-logo-img"
+                        onerror="this.style.display='none'">
+                </div>
+                <h1 class="brand-name">URBAN SANSKAR</h1>
+            </div>
+        </div>
+
+        <!-- Right Section: Clean Single Cart Action Handle -->
+        <div class="header-col nav-right">
+            <a href="cart.html" class="icon-action-btn cart-toggle-handle" aria-label="Open Shopping Cart"
+                style="text-decoration: none; color: inherit; position: relative; display: inline-flex; align-items: center; justify-content: center; background: none; border: none; padding: 0; cursor: pointer;">
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                <span class="cart-badge-dot">0</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- 3. Premium Left-Side Slide Mobile Drawer Overlay Structure -->
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+    <div class="mobile-navigation-drawer" id="mobile-nav-drawer">
+        <div class="drawer-header">
+            <span class="drawer-title">Menu</span>
+            <button class="close-drawer-btn" id="menu-close-btn" aria-label="Close Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <nav class="drawer-links-box">
+            <a href="index.html" class="drawer-link">Shop</a>
+            <a href="collections.html" class="drawer-link">All Collections</a>
+            <a href="about.html" class="drawer-link">Our Story</a>
+            <a href="shipping-returns.html" class="drawer-link">Shipping & Returns</a>
+            <a href="size-guide.html" class="drawer-link">Size Guide</a>
+        </nav>
+        <div class="drawer-footer">
+            <p>Rooted in simplicity, crafted for luxury.</p>
+        </div>
+    </div>
+
+
+    <!-- Main Product Presentation Workspace -->
+    <main class="product-detail-container">
+
+        <div class="product-gallery-wing">
+            <div class="thumbnail-stack" id="dyn-thumbnail-stack">
+            </div>
+            <div class="main-stage-frame">
+                <img src="" alt="Product Display" id="stage-display-img" style="object-fit: cover;">
+            </div>
+        </div>
+
+        <div class="product-info-panel-wing">
+
+            <span class="panel-collection-tag" id="dyn-collection"
+                style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #888; display: block; margin-bottom: 6px;">
+                Loading...
+            </span>
+
+            <h1 class="panel-product-title" id="dyn-title">Loading Product Details...</h1>
+
+            <div class="panel-price-row">
+                <span class="current-price" id="dyn-price">₹0</span>
+                <span class="tax-disclaimer">Inclusive of all taxes</span>
+            </div>
+
+            <hr class="fine-separator">
+
+            <p class="panel-description" id="dyn-desc" style="line-height: 1.6; color: #333; margin-bottom: 24px;"></p>
+
+            <div class="size-selector-zone">
+                <div class="size-zone-header">
+                    <span class="selector-label">Select Size</span>
+                    <button class="size-guide-trigger-btn" id="sizeGuideBtn">Size Guide</button>
+                </div>
+                <div class="size-options-wrapper" id="dyn-size-wrapper">
+                </div>
+            </div>
+
+            <div class="purchase-action-system">
+                <button class="action-btn-bag btn-outline-dark" id="add-to-bag-btn">Add To Bag</button>
+                <button class="action-btn-checkout btn-solid-dark" id="buy-now-btn">Buy It Now</button>
+            </div>
+
+            <div class="specs-accordion-block" style="margin-top: 28px;">
+
+                <details open style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
+                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
+                        Product Specifications
+                    </summary>
+                    <div class="accordion-inner-content"
+                        style="padding: 10px 0 4px 0; line-height: 1.7; color: #444; font-size: 0.95rem;">
+                        <p style="margin: 0 0 6px 0;"><strong>Fabric:</strong> <span id="dyn-fabric">-</span></p>
+                        <p style="margin: 0 0 6px 0;"><strong>Fit:</strong> <span id="dyn-fit">-</span></p>
+                        <p style="margin: 0;"><strong>Details:</strong> <span id="dyn-details">-</span></p>
+                    </div>
+                </details>
+
+                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
+                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
+                        Wash and Care
+                    </summary>
+                    <div class="accordion-inner-content"
+                        style="padding: 10px 0 4px 0; color: #444; font-size: 0.95rem;">
+                        <p style="margin: 0 0 10px 0; font-style: italic; color: #666; font-size: 0.9rem;">
+                            Treat your garment with care to enjoy it for years.
+                        </p>
+                        <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                            <li>Cold hand wash separately.</li>
+                            <li>Mild detergent only.</li>
+                            <li>Dry in shade.</li>
+                            <li>Warm iron.</li>
+                            <li>Do not bleach or tumble dry.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
+                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
+                        Size & Customisation
+                    </summary>
+                    <div class="accordion-inner-content"
+                        style="padding: 10px 0 4px 0; line-height: 1.6; color: #444; font-size: 0.95rem;">
+                        <p style="margin: 0 0 10px 0;">
+                            Our ready-to-ship pieces are available in S, M, and L. Need a different size? We offer
+                            complimentary size customisation at no additional cost to ensure a better fit.
+                        </p>
+                        <p style="margin: 0 0 14px 0;">
+                            Please note that design or pattern customisations may vary depending on the garment. If
+                            you'd like to discuss alterations, we'd be happy to help before you place your order.
+                        </p>
+                        <div
+                            style="background: #fdfdfd; border-left: 3px solid #008a4e; padding: 12px; border-radius: 2px;">
+                            <span
+                                style="font-size: 0.85rem; font-weight: 600; color: #111; display: block; margin-bottom: 4px;">
+                                Have questions about alterations?
+                            </span>
+                            <a href="https://wa.me/919746539916?text=Hi%20Urban%20Sanskar,%20I%20want%20to%20discuss%20size%20customisation%20for%20my%20outfit."
+                                target="_blank"
+                                style="color: #008a4e; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                    </path>
+                                </svg>
+                                Contact us on WhatsApp (+91 9746539916)
+                            </a>
+                        </div>
+                    </div>
+                </details>
+
+                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
+                    <summary
+                        style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Dispatch & Delivery</span>
+                    </summary>
+                    <div class="accordion-inner-content"
+                        style="padding: 14px 0 4px 0; font-size: 0.92rem; color: #333;">
+                        <div
+                            style="background: #fafafa; border: 1px solid #eaeaea; padding: 14px; margin-bottom: 10px; border-radius: 2px;">
+                            <strong
+                                style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; display: block; margin-bottom: 4px; color: #111;">Standard
+                                Orders</strong>
+                            <span style="color: #555;">Dispatched within 7 working days from order confirmation.</span>
+                        </div>
+                        <div
+                            style="background: #fafafa; border: 1px solid #eaeaea; padding: 14px; margin-bottom: 10px; border-radius: 2px;">
+                            <strong
+                                style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; display: block; margin-bottom: 4px; color: #111;">Ready-To-Ship
+                                Pieces</strong>
+                            <span style="color: #555;">Dispatched swiftly within 2 working days.</span>
+                        </div>
+                        <div style="background: #fafafa; border: 1px solid #eaeaea; padding: 14px; border-radius: 2px;">
+                            <strong
+                                style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; display: block; margin-bottom: 4px; color: #111;">Pre-Order
+                                Styles</strong>
+                            <span style="color: #555;">Crafted to order and dispatched within 3 weeks.</span>
+                        </div>
+                    </div>
+                </details>
+
+                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
+                    <summary
+                        style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Returns & Exchanges</span>
+                        <span
+                            style="background: #111; color: #fff; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; font-weight: 700; border-radius: 1px;">Strict
+                            Policy</span>
+                    </summary>
+                    <div class="accordion-inner-content"
+                        style="padding: 12px 0 4px 0; font-size: 0.92rem; color: #333; line-height: 1.6;">
+                        <p style="font-size: 1rem; color: #111; margin: 0 0 4px 0;">We offer size exchange, style
+                            exchange, or store credit only.</p>
+                        <p style="font-weight: 700; color: #d93838; font-size: 1rem; margin: 0 0 14px 0;">Strictly no
+                            monetary refunds are issued.</p>
+                        <ul style="margin: 0; padding-left: 18px; color: #555; line-height: 1.7;">
+                            <li style="margin-bottom: 6px;">Returns or exchange requests must be initiated within
+                                <strong style="color:#111;">3 days</strong> of delivery.
+                            </li>
+                            <li style="margin-bottom: 6px;">Any purchase can be exchanged for a different size. If your
+                                required size is unavailable, we will issue a store credit valid for <strong
+                                    style="color:#111;">six months</strong> from the date of issue.</li>
+                            <li>Please check our size chart carefully before purchasing. For any questions regarding
+                                size, fabric, or fit, contact us immediately.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
+                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
+                        Damaged or Defective Items
+                    </summary>
+                    <div class="accordion-inner-content"
+                        style="padding: 12px 0 4px 0; font-size: 0.92rem; color: #333; line-height: 1.6;">
+                        <p style="margin: 0 0 12px 0; font-weight: 500; color: #111;">All orders go through a strict,
+                            multi-level quality check before dispatch.</p>
+                        <ul style="margin: 0; padding-left: 18px; color: #555; line-height: 1.7;">
+                            <li style="margin-bottom: 6px;">Returns for damaged products must be strictly <strong
+                                    style="color:#111;">pre-approved via email</strong>. Any items sent back without
+                                prior email approval will not be accepted at our studio.</li>
+                            <li>We accept the physical transit return within <strong style="color:#111;">10
+                                    days</strong> once the approval is given.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
+                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
+                        Important Notes
+                    </summary>
+                    <div class="accordion-inner-content"
+                        style="padding: 12px 0 4px 0; font-size: 0.92rem; color: #333; line-height: 1.6;">
+                        <ul style="margin: 0; padding-left: 0; list-style-type: none; color: #555;">
+                            <li style="margin-bottom: 12px;">
+                                <strong style="color: #111; display: block; margin-bottom: 2px;">Shipping
+                                    Costs:</strong>
+                                The cost of return shipping logistics for size exchanges or damaged product returns is
+                                to be borne entirely by the customer.
+                            </li>
+                            <li>
+                                <strong style="color: #111; display: block; margin-bottom: 2px;">Final Sale:</strong>
+                                All discounted pieces, clearance items, and custom orders are final sale and cannot be
+                                exchanged or returned unless explicitly proven defective.
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+
+        </div>
+    </main>
+
+    <section class="recommendations-carousel-section">
+        <div class="slider-header-wrapper">
+            <div class="slider-title-block">
+                <span class="intro-sub">Curated Pairings</span>
+                <h2 class="slider-main-heading">You May Also Like</h2>
+            </div>
+            <div class="slider-arrow-controls">
+                <button class="slider-arrow-btn" id="slide-left-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="slider-arrow-btn" id="slide-right-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="product-slider-track" id="rec-slider-track">
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+
+            <div class="footer-col-block brand-brief">
+                <h2 class="footer-brand-name">URBAN SANSKAR</h2>
+                <p class="footer-tagline">Rooted in simplicity, crafted meticulously for the modern conscious mind.
+                </p>
+
+                <div class="footer-social-icons">
+                    <a href="https://instagram.com/_urban_sanskar" target="_blank" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+
+                    <a href="https://wa.me/919746539916" target="_blank" aria-label="WhatsApp">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a href="mailto:info@urbansanskar.in" aria-label="Email">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col-block">
+                <h5 class="footer-col-title">Shop</h5>
+                <ul class="footer-links-list">
+                    <li><a href="collections.html">All Collections</a></li>
+                    <!-- Query parameters added to the links -->
+                    <li><a href="collections.html?category=coord-sets">Co-ord Sets</a></li>
+                    <li><a href="collections.html?category=premium-linen">Premium Linen</a></li>
+                    <li><a href="collections.html?category=artisanal-kurtas">Artisanal Kurtas</a></li>
+                    <li><a href="collections.html?category=resort-lounge">Resort & Lounge</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col-block">
+                <h5 class="footer-col-title">Our World</h5>
+                <ul class="footer-links-list">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="our-world.html#artisans">Artisan Welfare</a></li>
+                    <li><a href="our-world.html#sustainability">Sustainability Report</a></li>
+                    <li><a href="our-world.html#journal">Journal / Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col-block">
+                <h5 class="footer-col-title">Assistance</h5>
+                <ul class="footer-links-list">
+                    <li><a href="shipping-returns.html">Shipping & Returns</a></li>
+                    <li><a href="size-guide.html">Size Guide</a></li>
+                    <li><a href="https://wa.me/919746539916" target="_blank">WhatsApp: +91 9746539916</a></li>
+                    <li><a href="tel:+919746539916">Call Support</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom-bar">
+            <p class="footer-copyright">&copy; 2026 Urban Sanskar. All Rights Reserved.</p>
+            <p class="footer-agency-credits">
+                Made by <a href="https://instagram.com/webbuilds.jk" target="_blank"
+                    class="developer-link">webbuilds.jk</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- SMART SIZE GUIDE MODAL (MOBILE FRIENDLY) -->
+    <!-- ========================================== -->
+    <div id="sizeGuideModal" class="custom-size-modal"
+        style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); align-items: center; justify-content: center;">
+
+        <div class="custom-size-modal-content"
+            style="background-color: #fff; width: 90%; max-width: 600px; height: 85vh; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; animation: slideUp 0.3s ease-out; position: relative;">
+
+            <!-- Modal Header -->
+            <div
+                style="padding: 16px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+                <div>
+                    <h3 style="margin: 0; font-size: 1.2rem; font-weight: 600; color: #111;">Size Chart</h3>
+                    <span
+                        style="font-size: 0.8rem; color: #666; letter-spacing: 0.05em; text-transform: uppercase;">Urban
+                        Sanskar Fit Matrix</span>
+                </div>
+                <!-- Close Button (X) -->
+                <button id="closeSizeGuide"
+                    style="background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #333; padding: 0 5px; line-height: 1;">&times;</button>
+            </div>
+
+            <!-- Modal Body (Scrollable for Table) -->
+            <div style="padding: 20px; overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch;">
+
+                <p style="font-size: 0.88rem; color: #666; margin: 0 0 20px 0; line-height: 1.5;">
+                    All measurements are specified in inches and represent garment dimensions. We recommend selecting
+                    your usual standard size.
+                </p>
+
+                <!-- TABLE 1: KURTA -->
+                <table class="urban-editorial-table" style="margin-bottom: 24px; width: 100%;">
+                    <thead>
+                        <tr style="background-color: #e3e8e2; color: #2c3e2b;">
+                            <th colspan="4"
+                                style="text-align: center; font-weight: 600; padding: 10px; font-size: 0.9rem;">KURTA
+                                (TOP)</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: left; font-size: 0.85rem;">Measurement</th>
+                            <th style="font-size: 0.85rem;">Small</th>
+                            <th style="font-size: 0.85rem;">Medium</th>
+                            <th style="font-size: 0.85rem;">Large</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 0.88rem;">
+                        <tr>
+                            <td class="bold-size-cell">Kurta Length</td>
+                            <td>44</td>
+                            <td>44</td>
+                            <td>44</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Shoulder</td>
+                            <td>14</td>
+                            <td>15</td>
+                            <td>15.5</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Chest <small
+                                    style="color: #666; display:block; font-size:0.75rem;">(Garment)</small></td>
+                            <td>34</td>
+                            <td>36</td>
+                            <td>38</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Waist</td>
+                            <td>28</td>
+                            <td>30</td>
+                            <td>32</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Hip</td>
+                            <td>36</td>
+                            <td>38</td>
+                            <td>40</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Sleeve Length</td>
+                            <td>17</td>
+                            <td>17</td>
+                            <td>17</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Arm Hole</td>
+                            <td>17</td>
+                            <td>19</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Upper Arm Round</td>
+                            <td>14</td>
+                            <td>16</td>
+                            <td>18</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Sleeve Round</td>
+                            <td>13</td>
+                            <td>13.5</td>
+                            <td>13.5</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Neck Deep (Front)</td>
+                            <td>6.5</td>
+                            <td>6.5</td>
+                            <td>6.5</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Neck Deep (Back)</td>
+                            <td>6.5</td>
+                            <td>6.5</td>
+                            <td>6.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- TABLE 2: PANTS -->
+                <table class="urban-editorial-table" style="width: 100%; margin-bottom: 20px;">
+                    <thead>
+                        <tr style="background-color: #e3e8e2; color: #2c3e2b;">
+                            <th colspan="4"
+                                style="text-align: center; font-weight: 600; padding: 10px; font-size: 0.9rem;">PANTS
+                                (BOTTOM)</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: left; font-size: 0.85rem;">Measurement</th>
+                            <th style="font-size: 0.85rem;">S & M <br><small
+                                    style="font-size:0.7rem;">(Combined)</small></th>
+                            <th style="font-size: 0.85rem;">S & M <br><small
+                                    style="font-size:0.7rem;">(Combined)</small></th>
+                            <th style="font-size: 0.85rem;">Large</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 0.88rem;">
+                        <tr>
+                            <td class="bold-size-cell">Pants Length</td>
+                            <td>38</td>
+                            <td>38</td>
+                            <td>38</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Waist (Stretched)</td>
+                            <td>34</td>
+                            <td>34</td>
+                            <td>36</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Hip</td>
+                            <td>36</td>
+                            <td>36</td>
+                            <td>40</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-size-cell">Pants Flare</td>
+                            <td>22</td>
+                            <td>22</td>
+                            <td>22</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="text-align: center; font-size: 0.8rem; color: #666; font-style: italic; margin-bottom: 20px;">
+                    All measurements are in inches.</p>
+
+                <!-- Production Notes Inside Modal -->
+                <div
+                    style="border: 1px solid #e0e0e0; padding: 14px; border-radius: 4px; background-color: #fafdfa; font-size: 0.82rem; line-height: 1.6; color: #555;">
+                    <strong
+                        style="color: #111; display: block; margin-bottom: 6px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Production
+                        Notes:</strong>
+                    <ul style="margin: 0; padding-left: 16px;">
+                        <li>1.5" one-side margin (total 3") given on all garments.</li>
+                        <li>Choose size based on your ease preference.</li>
+                        <li>A potential 1-inch manufacturing variation is possible.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Extra Smooth Animation CSS -->
+    <style>
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 🌍 API configuration
+            const API_BASE_URL = "https://urban-sanskar-backend.onrender.com";
+
+            // URL se real MongoDB ObjectId extract karo
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId) {
+                alert("Product ID missing! Redirecting to collections.");
+                window.location.href = "collections.html";
+                return;
+            }
+
+            // Dom elements cache (Upar shift kiya taaki status check safe rahe)
+            const addToBagBtn = document.getElementById("add-to-bag-btn");
+            const buyNowBtn = document.getElementById("buy-now-btn");
+            const cartBadge = document.querySelector(".cart-badge-dot");
+
+            // ==========================================
+            // 1. BACKEND CORE: FETCH & RENDER DATA FROM MONGO DB
+            // ==========================================
+            async function fetchAndRenderProduct() {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/products/${productId}`);
+                    const data = await response.json();
+
+                    if (!data || !data.success) {
+                        alert("Product not found!");
+                        window.location.href = "collections.html";
+                        return;
+                    }
+
+                    const product = data.product;
+
+                    // DOM Elements me data mapping
+                    document.getElementById("dyn-title").textContent = product.title || product.name;
+                    document.getElementById("dyn-collection").textContent = product.collectionName || "Latest Collection";
+                    document.getElementById("dyn-price").textContent = `₹${product.price.toLocaleString('en-IN')}`;
+                    document.getElementById("dyn-desc").textContent = product.description || "";
+
+                    // Specifications Accordion Updates
+                    document.getElementById("dyn-fabric").textContent = product.fabric || "Premium Blend";
+                    document.getElementById("dyn-fit").textContent = product.fit || "Standard Fit";
+                    document.getElementById("dyn-details").textContent = product.details || "Artisanal Craftsmanship";
+
+                    // 🔥 CRITICAL INVENTORY GUARD SHIELD (STEP 2 FIX) 🔥
+                    if (product.isSoldOut) {
+                        if (addToBagBtn) {
+                            addToBagBtn.textContent = "SOLD OUT";
+                            addToBagBtn.disabled = true;
+                            addToBagBtn.style.background = "#e5e5e5";
+                            addToBagBtn.style.color = "#999999";
+                            addToBagBtn.style.border = "1px solid #e5e5e5";
+                            addToBagBtn.style.cursor = "not-allowed";
+                        }
+                        if (buyNowBtn) {
+                            buyNowBtn.textContent = "OUT OF STOCK";
+                            buyNowBtn.disabled = true;
+                            buyNowBtn.style.background = "#cccccc";
+                            buyNowBtn.style.color = "#ffffff";
+                            buyNowBtn.style.border = "1px solid #cccccc";
+                            buyNowBtn.style.cursor = "not-allowed";
+                        }
+                    }
+
+                    // Gallery Rendering
+                    const mainStageImg = document.getElementById("stage-display-img");
+                    const thumbStack = document.getElementById("dyn-thumbnail-stack");
+
+                    if (product.images && product.images.length > 0) {
+                        mainStageImg.setAttribute("src", product.images[0]);
+                        thumbStack.innerHTML = ""; // Clear loader/static items
+
+                        product.images.forEach((imgUrl, idx) => {
+                            const imgNode = document.createElement("img");
+                            imgNode.src = imgUrl;
+                            imgNode.alt = `View ${idx + 1}`;
+                            imgNode.classList.add("thumb-img");
+                            if (idx === 0) imgNode.classList.add("active");
+
+                            // Thumbnail change handler
+                            imgNode.addEventListener("click", function () {
+                                document.querySelectorAll(".thumb-img").forEach(t => t.classList.remove("active"));
+                                imgNode.classList.add("active");
+                                mainStageImg.src = imgUrl;
+                            });
+
+                            thumbStack.appendChild(imgNode);
+                        });
+                    }
+
+                    // Dynamic Size Selector Injector
+                    const sizeWrapper = document.getElementById("dyn-size-wrapper");
+                    if (sizeWrapper && product.sizes) {
+                        sizeWrapper.innerHTML = ""; // Clear static data
+                        product.sizes.forEach((size, idx) => {
+                            const sizeBtn = document.createElement("button");
+                            sizeBtn.classList.add("size-chip-btn");
+                            sizeBtn.textContent = size;
+
+                            // Auto select first size by default
+                            if (idx === 0) sizeBtn.classList.add("active");
+
+                            sizeBtn.addEventListener("click", function () {
+                                // Agar product sold out hai toh size logic execute na ho
+                                if (product.isSoldOut) return;
+                                document.querySelectorAll(".size-chip-btn").forEach(b => b.classList.remove("active"));
+                                sizeBtn.classList.add("active");
+                            });
+
+                            sizeWrapper.appendChild(sizeBtn);
+                        });
+                    }
+
+                } catch (error) {
+                    console.error("Failed to load dynamic product context from backend:", error);
+                    alert("Error connecting to server. Displaying cached metadata template.");
+                }
+            }
+
+            fetchAndRenderProduct();
+
+            // ==========================================
+            // 2. MODAL LOGIC: SIZE GUIDE
+            // ==========================================
+            const modal = document.getElementById("sizeGuideModal");
+            const btn = document.getElementById("sizeGuideBtn");
+            const closeBtn = document.getElementById("closeSizeGuide");
+
+            function cleanClose() {
+                if (modal) modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+
+            if (btn && modal) {
+                btn.onclick = function (e) {
+                    e.preventDefault();
+                    modal.style.display = "flex";
+                    document.body.style.overflow = "hidden";
+                    history.pushState({ modalOpen: true }, null, "");
+                }
+            }
+
+            if (closeBtn) {
+                closeBtn.onclick = function () {
+                    cleanClose();
+                    if (history.state && history.state.modalOpen) {
+                        history.back();
+                    }
+                }
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    cleanClose();
+                    if (history.state && history.state.modalOpen) {
+                        history.back();
+                    }
+                }
+            }
+
+            window.addEventListener("popstate", function (event) {
+                if (modal && modal.style.display === "flex") {
+                    cleanClose();
+                }
+            });
+
+            // ==========================================
+            // 3. CART SYSTEM: LOCAL STORAGE STORAGE HANDLERS
+            // ==========================================
+            function updateCartBadge() {
+                let cart = JSON.parse(localStorage.getItem("urbanCart")) || [];
+                let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+                if (cartBadge) {
+                    cartBadge.textContent = totalItems;
+                    cartBadge.style.display = totalItems > 0 ? "flex" : "none";
+                }
+            }
+
+            updateCartBadge();
+
+            function handleCartStorage(selectedSize) {
+                const productTitle = document.getElementById("dyn-title")?.textContent.trim() || "Premium Garment";
+                const productPriceText = document.getElementById("dyn-price")?.textContent.trim() || "0";
+                const productImage = document.getElementById("stage-display-img")?.getAttribute("src") || "images/default.jpg";
+                const productPrice = parseInt(productPriceText.replace(/[^0-9]/g, '')) || 0;
+
+                const cartItemId = `${productId}-${selectedSize}`;
+                let cart = JSON.parse(localStorage.getItem("urbanCart")) || [];
+                const existingItemIndex = cart.findIndex(item => item.id === cartItemId);
+
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity += 1;
+                } else {
+                    cart.push({
+                        id: cartItemId,
+                        productId: productId,
+                        title: productTitle,
+                        price: productPrice,
+                        image: productImage,
+                        size: selectedSize,
+                        quantity: 1
+                    });
+                }
+
+                localStorage.setItem("urbanCart", JSON.stringify(cart));
+            }
+
+            if (addToBagBtn) {
+                addToBagBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const activeSizeChip = document.querySelector(".size-chip-btn.active");
+                    if (!activeSizeChip) {
+                        alert("Please select a size first!");
+                        return;
+                    }
+                    const selectedSize = activeSizeChip.textContent.trim();
+
+                    handleCartStorage(selectedSize);
+                    updateCartBadge();
+
+                    const originalText = addToBagBtn.textContent;
+                    addToBagBtn.textContent = "Added To Bag ✓";
+                    addToBagBtn.disabled = true;
+
+                    setTimeout(() => {
+                        addToBagBtn.textContent = originalText;
+                        addToBagBtn.disabled = false;
+                    }, 2000);
+                });
+            }
+
+            if (buyNowBtn) {
+                buyNowBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const activeSizeChip = document.querySelector(".size-chip-btn.active");
+                    if (!activeSizeChip) {
+                        alert("Please select a size first!");
+                        return;
+                    }
+                    const selectedSize = activeSizeChip.textContent.trim();
+
+                    handleCartStorage(selectedSize);
+                    window.location.href = "cart.html";
+                });
+            }
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>

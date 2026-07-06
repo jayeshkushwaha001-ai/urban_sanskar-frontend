@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Urban Sanskar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background: #fafafa;
+            color: #111;
+            padding-bottom: 60px;
+        }
+
+        .checkout-wrapper {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 40px;
+        }
+
+        .section-box {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            padding: 35px;
+            border-radius: 4px;
+        }
+
+        h2,
+        h3 {
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-size: 1.15rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input {
+            padding: 12px 14px;
+            border: 1px solid #ccc;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border 0.2s;
+            border-radius: 2px;
+            width: 100%;
+        }
+
+        .form-group input:focus {
+            border-color: #000;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-pay {
+            width: 100%;
+            padding: 16px;
+            background: #000;
+            color: #fff;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-pay:hover {
+            background: #222;
+        }
+
+        /* 🔥 Premium Mobile Responsiveness Responsive Breakpoint */
+        @media (max-width: 900px) {
+            .checkout-wrapper {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .section-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header / Navbar -->
+
+    <div class="checkout-wrapper">
+        <!-- LEFT: Customer Secure Form -->
+        <div class="section-box">
+            <h2>Shipping & Delivery Details</h2>
+            <!-- Real application me hum native browser form submission use karenge validation ke liye -->
+            <form id="shipping-form" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="cust-name">Full Name</label>
+                    <input type="text" id="cust-name" required placeholder="Rahul Sharma">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cust-email">Email Address</label>
+                        <input type="email" id="cust-email" required placeholder="rahul@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-phone">Phone Number</label>
+                        <input type="tel" id="cust-phone" required placeholder="10-Digit Mobile"
+                            pattern="[6-9][0-9]{9}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cust-address">Street Address / House No.</label>
+                    <input type="text" id="cust-address" required placeholder="Apartment, plot no, street name">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cust-city">City</label>
+                        <input type="text" id="cust-city" required placeholder="Mumbai">
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-state">State</label>
+                        <input type="text" id="cust-state" required placeholder="Maharashtra">
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-pincode">Pincode</label>
+                        <input type="text" id="cust-pincode" required placeholder="400001" pattern="[0-9]{6}">
+                    </div>
+                </div>
+
+                <!-- Explicit hidden submit button for standard validation trigger -->
+                <button type="submit" id="hidden-submit" style="display: none;"></button>
+            </form>
+        </div>
+
+        <!-- RIGHT: Live Order Review Summary -->
+        <div class="section-box" style="height: fit-content;">
+            <h3>Order Summary</h3>
+            <hr style="border:0; border-top:1px solid #eee; margin-bottom: 20px;">
+
+            <div class="summary-row">
+                <span style="color:#666;">Items Subtotal</span>
+                <span id="review-subtotal" style="font-weight: 500;">₹0</span>
+            </div>
+            <div class="summary-row">
+                <span style="color:#666;">Shipping & Handling</span>
+                <span id="review-shipping" style="font-weight: 500;">₹0</span>
+            </div>
+
+            <div class="total-row">
+                <span>Grand Total</span>
+                <span id="review-total">₹0</span>
+            </div>
+
+            <button type="button" class="btn-pay" id="razorpay-trigger-btn">Place Order & Pay</button>
+        </div>
+    </div>
+
+    <!-- Razorpay SDK and Scripts -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="app.js"></script>
+    <script src="checkout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Urban Sanskar | Executive Admin</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+            padding-bottom: 80px;
+            color: #1a1a1a;
+        }
+
+        .admin-mobile-header {
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+
+        }
+
+        .control-panel {
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tab Navigation Management */
+        .admin-view-section {
+            display: none;
+        }
+
+        .admin-view-section.active {
+            display: block;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Mobile Precision Inputs */
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #fafafa;
+            transition: all 0.3s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #000;
+            background: #fff;
+            outline: none;
+        }
+
+        /* Custom Upload Style */
+        .widget-btn {
+            background: #333;
+            color: white;
+            border: none;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            transition: background 0.2s;
+        }
+
+        .widget-btn:contain {
+            background: #555;
+        }
+
+        .preview-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .preview-img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .submit-btn {
+            background: #000;
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            margin-top: 10px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Order Card Styling */
+        .order-card {
+            border-left: 4px solid #000;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Thumb Navigation Panel */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #eaeaea;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            flex: 1;
+            padding: 18px 10px;
+            text-align: center;
+            border: none;
+            background: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #000;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-mobile-header">URBAN SANSKAR HUB</div>
+
+    <main class="control-panel">
+
+        <div id="section-dashboard" class="admin-view-section active">
+            <div class="stats-grid">
+                <div class="card">
+                    <h3>Total Sales</h3>
+                    <p id="total-sales-val" style="font-size: 1.6rem; font-weight: 800;">₹0</p>
+                </div>
+                <div class="card">
+                    <h3>Total Orders</h3>
+                    <p id="total-orders-val" style="font-size: 1.6rem; font-weight: 800;">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-add" class="admin-view-section">
+            <section class="card">
+                <h2 style="font-size: 1.2rem; margin-bottom: 20px; font-weight: 800;">Publish New Core Line</h2>
+                <form id="prodForm">
+
+                    <label>Product Title</label>
+                    <input type="text" id="prodTitle" placeholder="e.g., Classic Ivory Co-ord Set" required>
+
+                    <label>Price (INR)</label>
+                    <input type="number" id="prodPrice" placeholder="e.g., 4250" required>
+
+                    <label>Category</label>
+                    <select id="prodCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="premium-linen">Premium Linen</option>
+                        <option value="coord-sets">Co-ord Sets</option>
+                        <option value="artisanal-kurtas">Artisanal Kurtas</option>
+                        <option value="resort-lounge">Resort & Lounge</option>
+                    </select>
+
+                    <label>Collection Tag</label>
+                    <input type="text" id="prodCollectionTag" placeholder="e.g., Summer 26. (latest)">
+
+                    <label>Fabric Matrix Details</label>
+                    <input type="text" id="prodFabric" placeholder="e.g., 100% Certified Organic Premium Linen">
+
+                    <label Silhouette>Fit Type</label>
+                    <input type="text" id="prodFit" placeholder="e.g., Relaxed / Slim Fit">
+
+                    <label>Product Main Summary (desc)</label>
+                    <textarea id="prodDesc" placeholder="Product overview for detail page..." rows="3"
+                        required></textarea>
+
+                    <label>Artisanal Details / Specifications</label>
+                    <textarea id="prodDetails" placeholder="e.g., Minimalist Tailoring, Handwoven textures..."
+                        rows="3"></textarea>
+
+                    <label>Available Sizes (Separate with commas)</label>
+                    <input type="text" id="prodSizes" placeholder="S, M, L, XL, XXL" required>
+
+                    <label>Media Gallery Assets</label>
+                    <button type="button" id="upload_widget" class="widget-btn">📸 Launch Cloudinary
+                        Camera/Uploader</button>
+                    <div id="imagePreview" class="preview-container"></div>
+
+                    <label
+                        style="display: flex; align-items: center; gap: 12px; margin: 10px 0 20px 0; cursor: pointer;">
+                        <input type="checkbox" id="isBestSeller" style="width: auto; margin-bottom: 0;"> Mark as Slider
+                        Best Seller
+                    </label>
+
+                    <label
+                        style="display: flex; align-items: center; gap: 12px; margin: 10px 0 20px 0; cursor: pointer; color: #ff0000; font-weight: 700;">
+                        <input type="checkbox" id="isSoldOut" style="width: auto; margin-bottom: 0;"> 🚫 Mark as SOLD
+                        OUT (Unavailable)
+                    </label>
+                    
+                    <button type="submit" class="submit-btn">Publish to Database 🚀</button>
+                </form>
+            </section>
+        </div>
+
+        <div id="section-orders" class="admin-view-section">
+            <section class="card">
+                <h2 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 800;">Live Order Pipeline</h2>
+                <div id="orders-list">
+                    <p style="text-align: center; color: #888; padding: 20px;">Fetching server logs...</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="section-manage" class="admin-view-section">
+            <section class="card">
+                <h2 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 800; color: #111;">Inventory Control
+                </h2>
+                <p style="color: #666; font-size: 0.85rem; margin-bottom: 20px;">Edit</p>
+
+                <div id="admin-products-list" style="display: flex; flex-direction: column; gap: 15px;"></div>
+            </section>
+        </div>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">🏠 Dash</button>
+        <button class="nav-item" data-tab="add" onclick="switchTab('add')">➕ Add Product</button>
+        <button class="nav-item" data-tab="orders" onclick="switchTab('orders')">📦 Orders</button>
+        <button class="nav-item" data-tab="manage" onclick="switchTab('manage')">⚙️ Manage</button>
+    </nav>
+
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

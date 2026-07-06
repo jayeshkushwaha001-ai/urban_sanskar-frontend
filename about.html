@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Urban Sanskar</title>
+    <!-- Core Brand CSS Link (Ensure path is correct) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 1. Top Luxury Announcement Bar -->
+    <div class="announcement-bar">
+        <span>FREE SHIPPING-ORDERS ABOVE ₹4999/-. PAN INDIA SHIPPING</span>
+    </div>
+
+    <!-- 2. Master Header / Navbar -->
+    <header class="main-header">
+
+        <!-- Left Section: Desktop Navigation Links / Mobile Hamburger -->
+        <div class="header-col nav-left">
+            <!-- Mobile Hamburger (Hidden on Desktop) -->
+            <button class="menu-toggle-btn" id="menu-open-btn" aria-label="Open Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <line x1="4" y1="7" x2="20" y2="7"></line>
+                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                    <line x1="4" y1="17" x2="20" y2="17"></line>
+                </svg>
+            </button>
+
+            <!-- Desktop Menu -->
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link">Shop</a>
+                <a href="collections.html" class="nav-link">All Collections</a>
+                <a href="about.html" class="nav-link active">Our Story</a>
+            </nav>
+        </div>
+
+        <!-- Center Section: Stacked Circle Logo & Brand Name -->
+        <div class="header-col nav-center">
+            <div class="brand-identity">
+                <div class="logo-circle-container">
+                    <img src="logo.jpg" alt="Urban Sanskar Logo" class="brand-logo-img"
+                        onerror="this.style.display='none'">
+                </div>
+                <h1 class="brand-name">URBAN SANSKAR</h1>
+            </div>
+        </div>
+
+        <!-- Right Section: Clean Single Cart Action Handle -->
+        <div class="header-col nav-right">
+            <a href="cart.html" class="icon-action-btn cart-toggle-handle" aria-label="Open Shopping Cart"
+                style="text-decoration: none; color: inherit; position: relative; display: inline-flex; align-items: center; justify-content: center; background: none; border: none; padding: 0; cursor: pointer;">
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                <span class="cart-badge-dot">0</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- 3. Premium Left-Side Slide Mobile Drawer Overlay Structure -->
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+    <div class="mobile-navigation-drawer" id="mobile-nav-drawer">
+        <div class="drawer-header">
+            <span class="drawer-title">Menu</span>
+            <button class="close-drawer-btn" id="menu-close-btn" aria-label="Close Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <nav class="drawer-links-box">
+            <a href="index.html" class="drawer-link">Shop</a>
+            <a href="collections.html" class="drawer-link">All Collections</a>
+            <a href="about.html" class="drawer-link active">Our Story</a>
+            <a href="shipping-returns.html" class="drawer-link">Shipping & Returns</a>
+            <a href="size-guide.html" class="drawer-link">Size Guide</a>
+        </nav>
+        <div class="drawer-footer">
+            <p>Rooted in simplicity, crafted for luxury.</p>
+        </div>
+    </div>
+
+    <!-- MAIN EDITORIAL CONTENT -->
+    <main class="about-page-workspace">
+
+        <!-- SECTION 1: EMOTIVE HERO HEADER -->
+        <section class="about-hero-editorial-zone">
+            <span class="editorial-micro-tag">Our Philosophy</span>
+            <h1 class="about-hero-bold-statement">
+                "We believe the clothes you wear the most deserve the most thought."
+            </h1>
+        </section>
+
+        <hr class="editorial-divider">
+
+        <!-- SECTION 2: THE QUANTITY GRID (Asymmetric Text Split Layout) -->
+        <section class="about-split-grid-block">
+            <div class="grid-left-meta-title">
+                <h2>Intentional<br>Creation</h2>
+            </div>
+            <div class="grid-right-narrative-content">
+                <p class="story-body-main-p">
+                    We choose to create in small quantities, carefully limiting the number of designs we introduce. This
+                    allows us to produce with greater intention, reduce unnecessary dead stock, and focus on garments
+                    that are made to be worn often—not forgotten after a season.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE CORE MANIFESTO (Bold Visual Callout) -->
+        <section class="about-manifesto-banner-zone">
+            <div class="manifesto-card-frame">
+                <span class="manifesto-anchor-label">The Core Belief</span>
+                <h3 class="manifesto-core-phrase">
+                    Every decision we make—from the fabric we choose to the number of pieces we produce—is guided by one
+                    belief:
+                </h3>
+                <h2 class="manifesto-highlight-punchline">
+                    Thoughtful clothing creates thoughtful consumption.
+                </h2>
+                <p class="manifesto-sub-footer-text">
+                    Because responsibility doesn't begin after a garment is made. It begins long before.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE URBAN SANSKAR QUESTION (Left/Right Contrast Frame) -->
+        <section class="about-question-split-container">
+            <div class="question-identity-card">
+                <span class="brand-signature-callout">Urban Sanskar</span>
+                <h2 class="the-daily-question">
+                    Will she reach for this again tomorrow?
+                </h2>
+                <p class="question-action-clause">
+                    If the answer is no, we go back to the drawing board.
+                </p>
+            </div>
+            <div class="question-context-narrative">
+                <p class="story-body-italic-p">
+                    Our collections are thoughtfully designed for women who don't believe comfort should ever come at
+                    the cost of style. Whether it's a day at work, a weekend away, slow mornings, long journeys or
+                    everyday moments, each silhouette is created to move effortlessly through different parts of your
+                    life.
+                </p>
+                <p class="story-body-main-p">
+                    We believe versatility is one of the most sustainable choices a garment can offer. Clean lines,
+                    timeless silhouettes and considered details leave room for your own expression.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+
+            <div class="footer-col-block brand-brief">
+                <h2 class="footer-brand-name">URBAN SANSKAR</h2>
+                <p class="footer-tagline">Rooted in simplicity, crafted meticulously for the modern conscious mind.
+                </p>
+
+                <div class="footer-social-icons">
+                    <a href="https://instagram.com/_urban_sanskar" target="_blank" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+
+                    <a href="https://wa.me/919746539916" target="_blank" aria-label="WhatsApp">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a href="mailto:info@urbansanskar.in" aria-label="Email">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col-block">
+                <h5 class="footer-col-title">Shop</h5>
+                <ul class="footer-links-list">
+                    <li><a href="collections.html">All Collections</a></li>
+                    <!-- Query parameters added to the links -->
+                    <li><a href="collections.html?category=coord-sets">Co-ord Sets</a></li>
+                    <li><a href="collections.html?category=premium-linen">Premium Linen</a></li>
+                    <li><a href="collections.html?category=artisanal-kurtas">Artisanal Kurtas</a></li>
+                    <li><a href="collections.html?category=resort-lounge">Resort & Lounge</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col-block">
+                <h5 class="footer-col-title">Our World</h5>
+                <ul class="footer-links-list">
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="our-world.html#artisans">Artisan Welfare</a></li>
+                    <li><a href="our-world.html#sustainability">Sustainability Report</a></li>
+                    <li><a href="our-world.html#journal">Journal / Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col-block">
+                <h5 class="footer-col-title">Assistance</h5>
+                <ul class="footer-links-list">
+                    <li><a href="shipping-returns.html">Shipping & Returns</a></li>
+                    <li><a href="size-guide.html">Size Guide</a></li>
+                    <li><a href="https://wa.me/919746539916" target="_blank">WhatsApp: +91 9746539916</a></li>
+                    <li><a href="tel:+919746539916">Call Support</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom-bar">
+            <p class="footer-copyright">&copy; 2026 Urban Sanskar. All Rights Reserved.</p>
+            <p class="footer-agency-credits">
+                Made by <a href="https://instagram.com/webbuilds.jk" target="_blank"
+                    class="developer-link">webbuilds.jk</a>
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="app.js"></script>
+</body>
+
+</html>
