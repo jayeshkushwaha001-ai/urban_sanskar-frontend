@@ -6,13 +6,27 @@
     --font-brand-serif: 'Playfair Display', serif;
     --font-brand-sans: 'Inter', sans-serif;
 
-    /* 🔥 LOGO-INSPIRED PREMIUM COLOR PALETTE (LINEN IVORY) */
+    /* FOUNDATION CANVAS */
     --canvas-bg: #faf9f6;
-    /* Ekdum premium, saaf aur warm off-white */
-    --ink-primary: #111111;
-    --ink-secondary: #555555;
-    --border-fine: #dbd9d2;
-    /* Light canvas ke sath border ko thoda soft kiya */
+    /* Warm Ivory Linen (Perfect hai, isse mat chhedo) */
+
+    /* 🖋️ TEXT COLOR REFINEMENT (Newspaper black se shifting to Luxury Ink) */
+    --ink-primary: #201d19;
+    /* Deep Espresso Black (Raw black se soft aur premium lagta hai) */
+    --ink-secondary: #6e695f;
+    /* Warm Earthy Taupe/Grey (Newsprint grey nahi lagega) */
+    --border-fine: #e3ded5;
+    /* Ultra soft linen thread color borders ke liye */
+
+    /* 🔥 THE BOUTIQUE SECRET SAUCE (Inspired by your live assets) */
+    --accent-primary: #9cb09d;
+    /* Exact Sage Green jo image_c6e833.jpg ke button me h */
+    --accent-dark: #768a77;
+    /* Deep Sage for hovers, important links and focus text */
+    --accent-tint: #f0f4f0;
+    /* Light pastel background fills, cards, or subtle sections */
+    --accent-gold: #c2a67f;
+    /* Muted Metallic/Champagne gold for small luxury highlights */
 }
 
 * {
@@ -2608,3 +2622,710 @@ a {
         font-size: 0.95rem;
     }
 }
+
+/* Founder Section Layout */
+.about-founder-editorial-zone {
+    padding: 20px 5% 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.founder-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Image Block Styling */
+.founder-image-wrapper {
+    width: 100%;
+    position: sticky;
+    top: 40px;
+}
+
+.founder-editorial-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    /* Minimal smooth edges */
+}
+
+/* Typography & Flow */
+.founder-narrative-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.founder-greeting-heading {
+    font-family: 'Playfair Display', 'Didot', 'Georgia', serif;
+    /* Matching image_82535b style */
+    font-size: 2.2rem;
+    line-height: 1.4;
+    color: #111;
+    margin: 15px 0 30px 0;
+    font-weight: 400;
+}
+
+.founder-story-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.story-body-italic-p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+    margin-top: 15px;
+    border-left: 2px solid #111;
+    padding-left: 15px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .founder-split-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .founder-image-wrapper {
+        position: static;
+    }
+
+    .founder-greeting-heading {
+        font-size: 1.8rem;
+    }
+}
+
+/* Brand Values Section - Earthy Light Olive Theme */
+.brand-values-section {
+    background-color: #e9ebe0;
+    /* 🔥 Premium Muted Light Olive / Sage Color */
+    padding: 80px 5%;
+    width: 100%;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.value-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+/* Icon / Diamond Styling */
+.value-icon {
+    font-size: 1.1rem;
+    color: #111;
+    margin-bottom: 25px;
+}
+
+/* Heading Styling (Matching image_82d9e4 Serif Font) */
+.value-title {
+    font-family: 'Playfair Display', 'Didot', 'Georgia', serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+    color: #111;
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+}
+
+/* Body Text Styling */
+.value-text {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #333;
+    font-weight: 300;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .brand-values-section {
+        padding: 60px 6%;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+        /* Mobile par ek ke neeche ek aayega */
+        gap: 40px;
+    }
+
+    .value-icon {
+        margin-bottom: 15px;
+    }
+}
+
+/* --- Brand Accent Color Palette From Image --- */
+:root {
+    --brand-olive: #a4b49c;
+    /* 🔥 Exact light olive tint from image_8cda6e */
+    --brand-olive-dark: #8e9e86;
+    /* Slightly darker for hover interactions */
+    --text-dark: #222222;
+    --border-light: #e5e5e5;
+}
+
+/* Base Adjustments to kill the "Journal" vibe */
+.panel-collection-tag {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #777;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.panel-product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+/* Size Options Accent Overrides */
+/* Note: Make sure your JS adds an '.active' or '.selected' class to the active size button */
+.size-options-wrapper button.selected,
+.size-options-wrapper button.active {
+    background-color: var(--brand-olive) !important;
+    border-color: var(--brand-olive) !important;
+    color: #ffffff !important;
+}
+
+/* --- Premium Buttons Styling --- */
+.purchase-action-system {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.purchase-action-system button {
+    padding: 16px 20px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Add to Bag: Elegant Outline style using brand color */
+.action-btn-bag {
+    background-color: transparent;
+    border: 1.5px solid var(--brand-olive);
+    color: var(--brand-olive);
+}
+
+.action-btn-bag:hover {
+    background-color: rgba(164, 180, 156, 0.1);
+}
+
+/* Buy It Now: Full solid brand color */
+.action-btn-checkout {
+    background-color: var(--brand-olive);
+    border: none;
+    color: #ffffff;
+}
+
+.action-btn-checkout:hover {
+    background-color: var(--brand-olive-dark);
+}
+
+/* --- Clean Modern Accordions (No More Default Ugly Elements) --- */
+.specs-accordion-block {
+    margin-top: 35px;
+    border-top: 1px solid var(--border-light);
+}
+
+.premium-accordion-item {
+    border-bottom: 1px solid var(--border-light);
+    padding: 16px 0;
+}
+
+.accordion-trigger {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dark);
+    cursor: pointer;
+    list-style: none;
+    /* Removes standard browser arrow */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Custom indicator instead of standard black triangle */
+.accordion-trigger::-webkit-details-marker {
+    display: none;
+    /* Safari fix */
+}
+
+.accordion-trigger::after {
+    content: '+';
+    font-size: 1.2rem;
+    font-weight: 300;
+    transition: transform 0.3s ease;
+}
+
+.premium-accordion-item[open] .accordion-trigger::after {
+    content: '—';
+}
+
+/* Content area styling */
+.accordion-inner-content {
+    padding-top: 14px;
+    line-height: 1.7;
+    color: #4a4a4a;
+    font-size: 0.95rem;
+}
+
+.accordion-inner-content p {
+    margin: 0 0 8px 0;
+}
+
+.wash-care-intro {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 12px !important;
+}
+
+.wash-care-list {
+    margin: 0;
+    padding-left: 18px;
+    line-height: 1.8;
+}
+
+/* 🔥 FIX: Size buttons par hover karne par black color hatane ke liye */
+.size-options-wrapper button {
+    transition: all 0.2s ease;
+    /* Hover ko smooth banane ke liye */
+}
+
+/* Jab user normal button par mouse le jaye (Not Selected) */
+.size-options-wrapper button:hover {
+    border-color: var(--brand-olive) !important;
+    color: var(--brand-olive) !important;
+    background-color: rgba(164, 180, 156, 0.1) !important;
+    /* Light olive tint background */
+}
+
+/* Jab button already SELECTED ho, tab hover karne par black na ho, thoda dark green hi rahe */
+.size-options-wrapper button.selected:hover,
+.size-options-wrapper button.active:hover {
+    background-color: var(--brand-olive-dark) !important;
+    border-color: var(--brand-olive-dark) !important;
+    color: #ffffff !important;
+}
+
+/* 🔥 FIX: Accordion ke andar ka saara text italic se normal karne ke liye */
+.accordion-inner-content,
+.accordion-inner-content p,
+.accordion-inner-content span,
+.accordion-inner-content strong,
+.panel-description {
+    font-style: normal !important;
+    /* Ye har tarah ke italic text ko zabardasti normal kar dega */
+}
+
+/* --- Global Accent Palette --- */
+:root {
+    --brand-olive: #a4b49c;
+    --brand-olive-dark: #8e9e86;
+    --text-charcoal: #232623;
+    /* Pure black se badal kar premium charcoal */
+    --border-light: #eeeeee;
+}
+
+/* 1. Text Colors Code - Chained with Parent to beat old styles */
+.product-info-panel-wing .panel-product-title,
+.product-info-panel-wing .current-price,
+.product-info-panel-wing .accordion-trigger {
+    color: var(--text-charcoal);
+}
+
+/* 2. Top Collection Tag - Muted Olive Theme */
+.product-info-panel-wing .panel-collection-tag {
+    color: var(--brand-olive);
+    font-weight: 600;
+    font-size: 0.78rem;
+}
+
+/* 3. Size Buttons Hover Override (No !important) */
+.product-info-panel-wing .size-options-wrapper button {
+    transition: all 0.2s ease;
+}
+
+.product-info-panel-wing .size-options-wrapper button:hover {
+    border-color: var(--brand-olive);
+    color: var(--brand-olive);
+    background-color: rgba(164, 180, 156, 0.1);
+}
+
+/* Selected Size State Override */
+.product-info-panel-wing .size-options-wrapper button.selected,
+.product-info-panel-wing .size-options-wrapper button.active {
+    background-color: var(--brand-olive);
+    border-color: var(--brand-olive);
+    color: #ffffff;
+}
+
+.product-info-panel-wing .size-options-wrapper button.selected:hover,
+.product-info-panel-wing .size-options-wrapper button.active:hover {
+    background-color: var(--brand-olive-dark);
+    border-color: var(--brand-olive-dark);
+    color: #ffffff;
+}
+
+/* 4. Accordion Hover Interactions */
+.product-info-panel-wing .premium-accordion-item:hover .accordion-trigger,
+.product-info-panel-wing .premium-accordion-item:hover .accordion-trigger::after {
+    color: var(--brand-olive);
+}
+
+/* 5. Clean Strict Policy Badge */
+.product-info-panel-wing .premium-accordion-item .strict-policy-badge {
+    background-color: #5d6659;
+    color: #ffffff;
+    border-radius: 1px;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+
+/* 🟢 NEW ARRIVALS SPACING FIX */
+.new-arrivals-section {
+    margin-top: 180px;
+    /* Top banner se perfect luxury gap */
+    margin-bottom: 80px;
+    /* Niche waale section ke saath proper balance */
+    padding: 0 40px;
+    /* Side ki lining ko maintain rakhne ke liye */
+    box-sizing: border-box;
+}
+
+/* Agar screen chhoti ho (Mobile ke liye responsive check) */
+@media (max-width: 768px) {
+    .new-arrivals-section {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        padding: 0 20px;
+    }
+}
+
+/* 🟢 NEW ARRIVALS & BEST SELLERS STRUCTURAL SYNC */
+
+/* 1. New Arrivals ka custom side padding reset karo aur sirf vertical margins rakho */
+.new-arrivals-section {
+    margin-top: 90px;
+    /* Banner se clean luxury gap */
+    margin-bottom: 50px;
+    /* Best sellers section se gap */
+    padding: 0;
+    /* ❌ Side padding hata di taaki ye best-sellers ke layout ko follow kare */
+}
+
+/* 2. Dono sections ko group karo taaki layout and width properties hamesha identical rahein */
+.new-arrivals-section,
+.best-sellers-section {
+    /* Agar aapke best-sellers par koi alag se max-width ya padding hai, 
+       toh dono sections ab use perfectly share karenge */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 3. Slider Header Wrapper Sync */
+.new-arrivals-section .slider-header-wrapper,
+.best-sellers-section .slider-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* Headings aur arrows ko base-aligned rakhne ke liye */
+    width: 100%;
+}
+
+.intro-sub {
+    color: var(--accent-gold);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   🎨 BOUTIQUE COLOR OVERRIDES (Clean Cascade - Paste at the very bottom)
+   ========================================================================== */
+
+/* Announcement Bar Colors */
+.announcement-bar {
+    background-color: var(--accent-tint);
+    color: var(--accent-dark);
+    border-bottom: 1px solid var(--border-fine);
+}
+
+/* Navbar Base Colors */
+.main-header {
+    background-color: var(--canvas-bg);
+    border-bottom: 1px solid var(--border-fine);
+    color: var(--ink-primary);
+}
+
+/* Desktop Links Colors */
+.nav-link {
+    color: var(--ink-secondary);
+}
+
+.nav-link:hover {
+    color: var(--accent-dark);
+}
+
+.nav-link.active {
+    color: var(--ink-primary);
+}
+
+.nav-link.active::after {
+    background-color: var(--accent-primary);
+}
+
+/* Icons & Hamburger Colors */
+.menu-toggle-btn {
+    color: var(--ink-primary);
+}
+
+.menu-toggle-btn:hover,
+.cart-toggle-handle:hover {
+    color: var(--accent-dark);
+}
+
+.cart-badge-dot {
+    background-color: var(--accent-dark);
+    color: #ffffff;
+}
+
+/* Mobile Navigation Drawer Colors */
+.mobile-navigation-drawer {
+    background-color: var(--canvas-bg);
+}
+
+.drawer-header {
+    border-bottom: 1px solid var(--border-fine);
+}
+
+.drawer-title {
+    color: var(--accent-gold);
+}
+
+.close-drawer-btn:hover {
+    color: var(--accent-dark);
+}
+
+/* Mobile Drawer Links Colors */
+.drawer-link {
+    color: var(--ink-primary);
+}
+
+.drawer-link:hover {
+    color: var(--accent-dark);
+    background-color: var(--accent-tint);
+}
+
+.drawer-link.active {
+    color: var(--accent-dark);
+    background-color: var(--accent-tint);
+    border-left: 3px solid var(--accent-primary);
+}
+
+/* Drawer Footer Colors */
+.drawer-footer {
+    border-top: 1px solid var(--border-fine);
+    background-color: var(--accent-tint);
+}
+
+.drawer-footer p {
+    color: var(--ink-secondary);
+}
+
+/* ==========================================================================
+   🛍️ PRODUCT SLIDER SECTIONS COLOR UPGRADE
+   ========================================================================== */
+
+/* Main Headings Upgrade (Soft Luxury Espresso Ink) */
+.slider-main-heading {
+    color: var(--ink-primary);
+}
+
+/* Slider Arrow Controls - Rest State */
+.slider-arrow-btn {
+    color: var(--ink-secondary);
+    border-color: var(--border-fine);
+    background-color: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Slider Arrow Controls - Hover State (Boutique Sage Green Fade) */
+.slider-arrow-btn:hover {
+    color: var(--accent-dark);
+    background-color: var(--accent-tint);
+    border-color: var(--accent-primary);
+}
+
+/* Inline Loading Text Override */
+/* (Yahan !important zaroori hai kyunki HTML me inline 'color: #888' likha hua hai) */
+.product-slider-track>div {
+    color: var(--ink-secondary) !important;
+}
+
+/* ==========================================================================
+   🏷️ EDITORIAL CATEGORIES SECTION COLOR UPGRADE (Bottom Overrides)
+   ========================================================================== */
+
+/* Main Intro Heading (Deep Espresso Ink) */
+.intro-main-heading {
+    color: var(--ink-primary);
+}
+
+/* Category Serial Numbers (Matching with your Golden Intro) */
+.cat-count {
+    color: var(--accent-gold);
+}
+
+/* Category Title & Descriptions */
+.cat-title {
+    color: var(--ink-primary);
+}
+
+.cat-description {
+    color: var(--ink-secondary);
+}
+
+/* Explore/Action Buttons - Rest State */
+.cat-action-link-btn {
+    color: var(--ink-primary);
+    border-color: var(--border-fine);
+    background-color: transparent;
+    /* Clean transparent canvas */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Explore/Action Buttons - Hover State (Luxury Sage Green Fill Shift) */
+.cat-action-link-btn:hover {
+    color: #ffffff;
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
+}
+
+/* ==========================================================================
+   📱 MOBILE TAP HIGHLIGHT REMOVAL (Premium Feel Fix)
+   ========================================================================== */
+
+/* 1. Mobile par click karne par aane wala ganda blue overlay block karne ke liye */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 2. Click karne ke baad jo default sharp blue outline/border reh jati hai, use hatane ke liye */
+input:focus,
+button:focus,
+a:focus,
+textarea:focus {
+    outline: none;
+}
+
+/* ==========================================================================
+   📨 NEWSLETTER / WHATSAPP HUB COLOR UPGRADE (Bottom Overrides)
+   ========================================================================== */
+
+/* Full Section Background (Soft Organic Linen Layer) */
+.newsletter-section {
+    background-color: var(--accent-tint);
+    border-top: 1px solid var(--border-fine);
+    border-bottom: 1px solid var(--border-fine);
+}
+
+/* Subtitle (The Inner Circle) - Keeping it Ancient Gold */
+.news-sub {
+    color: var(--accent-gold);
+}
+
+/* Main Heading (Soft Luxury Espresso Ink) */
+.news-title {
+    color: var(--ink-primary);
+}
+
+/* Description Text (Warm Earthy Taupe) */
+.news-desc {
+    color: var(--ink-secondary);
+}
+
+/* WhatsApp CTA Button - Rest State (Premium Sage Green) */
+/* (Standard cheap neon green use nahi karenge, premium deep sage look denge) */
+.news-submit-btn {
+    background-color: var(--accent-dark);
+    color: #ffffff;
+    border: 1px solid var(--accent-dark);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* WhatsApp CTA Button - Hover State (Shifting to Deep Espresso) */
+.news-submit-btn:hover {
+    background-color: var(--ink-primary);
+    border-color: var(--ink-primary);
+    color: var(--canvas-bg);
+}
+
+/* ==========================================================================
+   🛍️ COLLECTIONS WORKSPACE & FILTER CHIPS COLOR UPGRADE
+   ========================================================================== */
+
+/* Page Title (Deep Espresso Ink - Soft Luxury Vibe) */
+.collections-main-title {
+    color: var(--ink-primary);
+}
+
+/* Tagline Description (Warm Earthy Taupe) */
+.collections-tagline {
+    color: var(--ink-secondary);
+}
+
+/* Filter Navigation Bar Border (Fine separation line) */
+.filter-navigation-bar {
+    border-bottom: 1px solid var(--border-fine);
+}
+
+/* Filter Chips - Rest State (Clean, Lightweight & Unfinished Linen Look) */
+.filter-chip {
+    background-color: transparent;
+    color: var(--ink-secondary);
+    border: 1px solid var(--border-fine);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Filter Chips - Hover State (Subtle Organic Blend) */
+.filter-chip:hover {
+    color: var(--accent-dark);
+    background-color: var(--accent-tint);
+    border-color: var(--accent-primary);
+}
+
+/* Filter Chips - Active State (The Real Hero Boutique Shot) */
+/* Jab koi category active hogi, toh wo exact tumhare Sage Green look me blend ho jayegi */
+.filter-chip.active {
+    background-color: var(--accent-dark);
+    color: #ffffff;
+    border-color: var(--accent-dark);
+}
+
