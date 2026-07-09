@@ -223,10 +223,8 @@
                     <label>Category</label>
                     <select id="prodCategory" required>
                         <option value="">Select Category</option>
-                        <option value="premium-linen">Premium Linen</option>
                         <option value="coord-sets">Co-ord Sets</option>
-                        <option value="artisanal-kurtas">Artisanal Kurtas</option>
-                        <option value="resort-lounge">Resort & Lounge</option>
+                        <option value="dress">Dress</option>
                         <option value="handloom-dupatta">Handloom Stoles & Dupatta</option>
                     </select>
 
@@ -262,11 +260,18 @@
                     </label>
 
                     <label
+                        style="display: flex; align-items: center; gap: 12px; margin: 10px 0 20px 0; cursor: pointer; color: #008000; font-weight: 700;">
+                        <input type="checkbox" id="isNewArrival" style="width: auto; margin-bottom: 0;"> ✨ Mark as
+                        Slider
+                        New Arrival
+                    </label>
+
+                    <label
                         style="display: flex; align-items: center; gap: 12px; margin: 10px 0 20px 0; cursor: pointer; color: #ff0000; font-weight: 700;">
                         <input type="checkbox" id="isSoldOut" style="width: auto; margin-bottom: 0;"> 🚫 Mark as SOLD
                         OUT (Unavailable)
                     </label>
-                    
+
                     <button type="submit" class="submit-btn">Publish to Database 🚀</button>
                 </form>
             </section>
