@@ -1,17 +1,16 @@
-// admin.js (Fixed Cloudinary Widget & Double Event Listeners)
+// admin.js (Fixed Cloudinary Widget, Dynamic Edit Modal Form & Image Removal Cross Engine)
 const API_BASE_URL = "https://urban-sanskar-backend.onrender.com";
 let uploadedImages = [];
+let editUploadedImages = []; // Edit mode ke liye alag se image state tracker
+window.allAdminProducts = []; // Saare products ko globally save rakhne ke liye
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 🛡️ SECURITY CHECK: Agar localstorage me token nahi h, toh login screen dikhao
     const token = localStorage.getItem("adminToken");
     if (!token) {
         showLoginUI();
     } else {
         initDashboard();
     }
-
-    // 🔥 FIX: Yahan se double event listener hata diya, kyuki wo showLoginUI ke andar handle ho rha h
 });
 
 function initDashboard() {
@@ -52,7 +51,6 @@ async function handleAdminLogin(e) {
     }
 }
 
-// LOGOUT SYSTEM
 function handleAdminLogout() {
     localStorage.removeItem("adminToken");
     window.location.reload();
@@ -74,21 +72,41 @@ function switchTab(targetSection) {
     if (targetSection === 'dashboard') fetchDashboardStats();
 }
 
-// CLOUDINARY ENGINE INTEGRATION
+// 🛠️ RE-RENDER MAIN FORM IMAGE PREVIEWS WITH CROSS (X) REMOVAL BUTTON
+function renderImagePreviews() {
+    const previewContainer = document.getElementById('imagePreview');
+    if (!previewContainer) return;
+
+    previewContainer.innerHTML = uploadedImages.map((url, index) => `
+        <div class="preview-img-container" style="position: relative; display: inline-block; margin: 5px;">
+            <img src="${url}" style="width:80px; height:80px; object-fit:cover; border-radius:6px; border:1px solid #ddd;">
+            <button type="button" onclick="removeUploadedImage(${index})" style="position: absolute; top: -6px; right: -6px; background: #ff0000; color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">×</button>
+        </div>
+    `).join('');
+}
+
+function removeUploadedImage(index) {
+    uploadedImages.splice(index, 1);
+    renderImagePreviews();
+}
+
+// CLOUDINARY ENGINE INTEGRATION (SMART CONTEXT CONFIGURED)
 function setupCloudinaryWidget() {
     const uploadBtn = document.getElementById("upload_widget");
     if (!uploadBtn) return;
 
-    // 🔥 FIX: 'cloudPreset' ko badal kar 'uploadPreset' kar diya hai
     const myWidget = cloudinary.createUploadWidget({
         cloudName: 'bg31kjy3',
         uploadPreset: 'urban_preset'
     }, (error, result) => {
         if (!error && result && result.event === "success") {
-            uploadedImages.push(result.info.secure_url);
-            const previewContainer = document.getElementById('imagePreview');
-            if (previewContainer) {
-                previewContainer.innerHTML += `<img src="${result.info.secure_url}" class="preview-img" style="width:80px; height:80px; object-fit:cover; margin:5px; border-radius:6px;">`;
+            const isModalOpen = document.getElementById("editProductModal");
+            if (isModalOpen) {
+                editUploadedImages.push(result.info.secure_url);
+                renderEditImagePreviews();
+            } else {
+                uploadedImages.push(result.info.secure_url);
+                renderImagePreviews();
             }
         }
     });
@@ -100,9 +118,7 @@ function setupCloudinaryWidget() {
 async function fetchDashboardStats() {
     try {
         const response = await fetch(`${API_BASE_URL}/api/admin/stats`, {
-            headers: {
-                "Authorization": localStorage.getItem("adminToken")
-            }
+            headers: { "Authorization": localStorage.getItem("adminToken") }
         });
 
         if (response.status === 401) {
@@ -111,7 +127,6 @@ async function fetchDashboardStats() {
         }
 
         const data = await response.json();
-
         if (data.success) {
             document.getElementById("total-sales-val").textContent = `₹${data.totalSales.toLocaleString('en-IN')}`;
             document.getElementById("total-orders-val").textContent = data.totalOrders;
@@ -145,6 +160,7 @@ async function handleProductFormSubmission(e) {
         fit: document.getElementById("prodFit").value.trim() || "Relaxed",
         details: document.getElementById("prodDetails").value.trim() || "Minimalist Tailoring",
         isBestSeller: document.getElementById("isBestSeller").checked,
+        isNewArrival: document.getElementById("isNewArrival").checked,
         isSoldOut: document.getElementById("isSoldOut").checked
     };
 
@@ -176,9 +192,7 @@ async function fetchLiveOrders() {
     if (!listContainer) return;
     try {
         const response = await fetch(`${API_BASE_URL}/api/admin/orders`, {
-            headers: {
-                "Authorization": localStorage.getItem("adminToken")
-            }
+            headers: { "Authorization": localStorage.getItem("adminToken") }
         });
 
         if (response.status === 401) {
@@ -248,7 +262,7 @@ async function fetchLiveOrders() {
     }
 }
 
-// SARE PRODUCTS LISTING (WITH SOLD OUT SUPPORT 🚫)
+// SARE PRODUCTS LISTING
 async function fetchAdminProducts() {
     const container = document.getElementById('admin-products-list');
     if (!container) return;
@@ -260,11 +274,12 @@ async function fetchAdminProducts() {
             container.innerHTML = "<p style='color:red;'>Inventory khali hai bhai!</p>";
             return;
         }
+
+        window.allAdminProducts = data.products;
+
         container.innerHTML = data.products.map(p => {
-            const sizesStr = p.sizes ? p.sizes.join(',') : 'S,M,L,XL';
-            const safeTitle = p.title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-            const safeTag = (p.collectionTag || "").replace(/'/g, "\\'").replace(/"/g, '&quot;');
             const isSoldOutVal = p.isSoldOut || false;
+            const isNewArrivalVal = p.isNewArrival || false;
 
             return `
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee;">
@@ -273,7 +288,8 @@ async function fetchAdminProducts() {
                         <div>
                             <p style="font-weight: 700; margin: 0; color: #111;">
                                 ${p.title}
-                                ${isSoldOutVal ? '<span style="background: #ff0000; color: #fff; font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 6px;">SOLD OUT</span>' : ''}
+                                ${isNewArrivalVal ? '<span style="background: #008000; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 6px; text-transform: uppercase;">NEW ARRIVAL</span>' : ''}
+                                ${isSoldOutVal ? '<span style="background: #ff0000; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 6px; text-transform: uppercase;">SOLD OUT</span>' : ''}
                             </p>
                             <p style="color: #666; font-size: 0.85rem; margin: 2px 0 0 0;">
                                 ₹${p.price.toLocaleString('en-IN')} | 
@@ -283,7 +299,7 @@ async function fetchAdminProducts() {
                         </div>
                     </div>
                     <div style="display: flex; gap: 8px;">
-                        <button onclick="editProductPrompt('${p._id}', '${safeTitle}', ${p.price}, '${sizesStr}', '${safeTag}', ${isSoldOutVal})" style="background: #111; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer;">✏️ Edit</button>
+                        <button onclick="openEditModal('${p._id}')" style="background: #111; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer;">✏️ Edit</button>
                         <button onclick="deleteProduct('${p._id}')" style="background: #ffebe6; color: #ff0000; border: 1px solid #ffd1c7; padding: 6px 12px; border-radius: 6px; cursor: pointer;">🗑️ Delete</button>
                     </div>
                 </div>
@@ -310,38 +326,176 @@ async function deleteProduct(id) {
     }
 }
 
-// QUICK EDIT PROMPT (UPDATED WITH TAG & SOLD OUT DIALOGS ⚙️)
-async function editProductPrompt(id, oldTitle, oldPrice, oldSizes, oldTag, oldSoldOut) {
-    const newTitle = prompt("Title:", oldTitle); if (newTitle === null) return;
-    const newPrice = prompt("Price(₹):", oldPrice); if (newPrice === null) return;
-    const newSizesStr = prompt("Sizes:", oldSizes); if (newSizesStr === null) return;
-    const newTag = prompt("Collection Tag:", oldTag); if (newTag === null) return;
+// 📦 MODAL IMAGE RENDERING ENGINE
+function renderEditImagePreviews() {
+    const editPreviewContainer = document.getElementById('editImagePreviewContainer');
+    if (!editPreviewContainer) return;
 
-    const newSoldOut = confirm(`Kya yeh product SOLD OUT mark karna hai?\n\n[Current Status: ${oldSoldOut === 'true' || oldSoldOut === true ? "SOLD OUT" : "AVAILABLE"}]\n\n(Click OK for SOLD OUT, Click CANCEL for AVAILABLE)`);
+    editPreviewContainer.innerHTML = editUploadedImages.map((url, index) => `
+        <div style="position: relative; display: inline-block; margin: 5px;">
+            <img src="${url}" style="width:75px; height:75px; object-fit:cover; border-radius:6px; border:1px solid #ccc;">
+            <button type="button" onclick="removeEditUploadedImage(${index})" style="position: absolute; top: -5px; right: -5px; background: #ff0000; color: #fff; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.4);">×</button>
+        </div>
+    `).join('');
+}
 
-    if (!newTitle.trim()) return alert("Fill Title!");
-    if (isNaN(newPrice) || parseInt(newPrice) <= 0) return alert("Check Price!");
+function removeEditUploadedImage(index) {
+    editUploadedImages.splice(index, 1);
+    renderEditImagePreviews();
+}
 
-    const sizesArray = newSizesStr.split(',').map(s => s.trim().toUpperCase()).filter(s => s !== "");
+// 🎨 OPEN DYNAMIC EDIT MODAL FORM (FIXED CATEGORIES SYNCED WITH HTML 💎)
+function openEditModal(productId) {
+    const product = window.allAdminProducts.find(p => p._id === productId);
+    if (!product) return alert("Product data mismatch error!");
+
+    editUploadedImages = [...(product.images || [])];
+
+    const modalDiv = document.createElement("div");
+    modalDiv.id = "editProductModal";
+    modalDiv.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 10000; font-family: sans-serif; padding: 15px; box-sizing: border-box;";
+
+    modalDiv.innerHTML = `
+        <div style="background: #fff; width: 100%; max-width: 550px; max-height: 90vh; overflow-y: auto; border-radius: 12px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative;">
+            <button onclick="closeEditModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">&times;</button>
+            <h3 style="margin-top: 0; color: #111; font-weight: 800; border-bottom: 2px solid #eee; padding-bottom: 10px; text-transform: uppercase; font-size: 1.2rem;">✏️ Edit Product Details</h3>
+            
+            <form id="modalEditForm" style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+                <div>
+                    <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">PRODUCT TITLE</label>
+                    <input type="text" id="editTitle" value="${product.title}" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">PRICE (₹)</label>
+                        <input type="number" id="editPrice" value="${product.price}" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">CATEGORY</label>
+                        <!-- 🔥 DYNAMIC CATEGORY LOGIC FIXED TO MATCH YOUR EXACT HTML OPTIONS -->
+                        <select id="editCategory" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                            <option value="">Select Category</option>
+                            <option value="coord-sets" ${product.category === 'coord-sets' ? 'selected' : ''}>Co-ord Sets</option>
+                            <option value="dress" ${product.category === 'dress' ? 'selected' : ''}>Dress</option>
+                            <option value="handloom-dupatta" ${product.category === 'handloom-dupatta' ? 'selected' : ''}>Handloom Stoles & Dupatta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">SIZES (Comma Separated)</label>
+                    <input type="text" id="editSizes" value="${product.sizes ? product.sizes.join(', ') : 'S, M, L, XL'}" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                </div>
+
+                <div>
+                    <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">COLLECTION TAG</label>
+                    <input type="text" id="editTag" value="${product.collectionTag || ''}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                </div>
+
+                <div>
+                    <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">DESCRIPTION</label>
+                    <textarea id="editDesc" rows="2" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box; resize: vertical;">${product.desc || ''}</textarea>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">FABRIC</label>
+                        <input type="text" id="editFabric" value="${product.fabric || ''}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">FIT</label>
+                        <input type="text" id="editFit" value="${product.fit || ''}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">ADDITIONAL DETAILS</label>
+                    <input type="text" id="editDetails" value="${product.details || ''}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                </div>
+
+                <!-- IMAGE MANAGEMENT INTERFACE -->
+                <div>
+                    <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">PRODUCT IMAGES</label>
+                    <button type="button" onclick="document.getElementById('upload_widget').click()" style="background: #f3f4f6; color: #111; border: 1px dashed #bbb; padding: 8px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 8px;">+ Upload More via Cloudinary</button>
+                    <div id="editImagePreviewContainer" style="display: flex; flex-wrap: wrap; gap: 5px; background: #fafafa; border: 1px solid #eee; padding: 8px; border-radius: 6px; min-height: 40px;"></div>
+                </div>
+
+                <!-- TAG STATUS TOGGLES -->
+                <div style="display: flex; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #eee; flex-wrap: wrap;">
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+                        <input type="checkbox" id="editIsBestSeller" ${product.isBestSeller ? 'checked' : ''}> Best Seller
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+                        <input type="checkbox" id="editIsNewArrival" ${product.isNewArrival ? 'checked' : ''}> New Arrival
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: #ff0000;">
+                        <input type="checkbox" id="editIsSoldOut" ${product.isSoldOut ? 'checked' : ''}> Sold Out
+                    </label>
+                </div>
+
+                <button type="submit" style="background: #111; color: #fff; font-weight: 700; border: none; padding: 12px; border-radius: 6px; cursor: pointer; margin-top: 5px; letter-spacing: 0.5px; text-transform: uppercase;">Save Product Changes</button>
+            </form>
+        </div>
+    `;
+
+    document.body.appendChild(modalDiv);
+    renderEditImagePreviews();
+
+    document.getElementById("modalEditForm").addEventListener("submit", (e) => handleEditFormSubmit(e, productId));
+}
+
+function closeEditModal() {
+    const modal = document.getElementById("editProductModal");
+    if (modal) modal.remove();
+    editUploadedImages = [];
+}
+
+// 🔄 SAVE DYNAMIC MODAL CHANGES TO LIVE DATABASE PIPELINE
+async function handleEditFormSubmit(e, id) {
+    e.preventDefault();
+
+    if (editUploadedImages.length === 0) {
+        alert("Bhai, kam se kam ek product image toh rkho!");
+        return;
+    }
+
+    const sizesStr = document.getElementById("editSizes").value;
+    const processedSizes = sizesStr.split(',').map(s => s.trim().toUpperCase()).filter(s => s !== "");
+
+    const updatedPayload = {
+        title: document.getElementById("editTitle").value.trim(),
+        price: parseInt(document.getElementById("editPrice").value),
+        category: document.getElementById("editCategory").value,
+        sizes: processedSizes,
+        collectionTag: document.getElementById("editTag").value.trim(),
+        desc: document.getElementById("editDesc").value.trim(),
+        fabric: document.getElementById("editFabric").value.trim(),
+        fit: document.getElementById("editFit").value.trim(),
+        details: document.getElementById("editDetails").value.trim(),
+        images: editUploadedImages,
+        isBestSeller: document.getElementById("editIsBestSeller").checked,
+        isNewArrival: document.getElementById("editIsNewArrival").checked,
+        isSoldOut: document.getElementById("editIsSoldOut").checked
+    };
 
     try {
         const res = await fetch(`${API_BASE_URL}/api/products/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: newTitle.trim(),
-                price: parseInt(newPrice),
-                sizes: sizesArray,
-                collectionTag: newTag.trim(),
-                isSoldOut: newSoldOut
-            })
+            body: JSON.stringify(updatedPayload)
         });
+
         const data = await res.json();
         if (data.success) {
-            alert("Product updated cleanly! 🔄");
+            alert("Product updated flawlessly! 🔄");
+            closeEditModal();
             fetchAdminProducts();
+        } else {
+            alert("Error: " + data.message);
         }
     } catch (err) {
+        console.error(err);
         alert("Server issue during updatation!");
     }
 }
