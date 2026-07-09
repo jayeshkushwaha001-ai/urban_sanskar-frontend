@@ -37,7 +37,7 @@
             <nav class="desktop-nav">
                 <a href="index.html" class="nav-link active">Shop</a>
                 <a href="collections.html" class="nav-link">All Collections</a>
-                <a href="about.html" class="nav-link">Our Story</a>
+                <a href="about.html" class="nav-link">About us</a>
             </nav>
         </div>
 
@@ -85,7 +85,7 @@
         <nav class="drawer-links-box">
             <a href="index.html" class="drawer-link active">Shop</a>
             <a href="collections.html" class="drawer-link">All Collections</a>
-            <a href="about.html" class="drawer-link">Our Story</a>
+            <a href="about.html" class="drawer-link">About us</a>
             <a href="shipping-returns.html" class="drawer-link">Shipping & Returns</a>
             <a href="size-guide.html" class="drawer-link">Size Guide</a>
         </nav>
@@ -115,8 +115,37 @@
         </div>
     </section>
 
+    <section class="new-arrivals-section">
+        <div class="slider-header-wrapper">
+            <div class="slider-title-block">
+                <span class="intro-sub">Freshly Curated</span>
+                <h2 class="slider-main-heading">New Arrivals</h2>
+            </div>
 
- <section class="best-sellers-section">
+            <div class="slider-arrow-controls">
+                <button class="slider-arrow-btn arrow-left" id="arrival-slide-left-btn" aria-label="Slide Left">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="slider-arrow-btn arrow-right" id="arrival-slide-right-btn" aria-label="Slide Right">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="product-slider-track" id="new-arrivals-track">
+            <div style="padding: 40px; text-align: center; color: #888; grid-column: 1/-1; width: 100%;">
+                Loading freshly curated additions...
+            </div>
+        </div>
+    </section>
+
+    <section class="best-sellers-section">
         <div class="slider-header-wrapper">
             <div class="slider-title-block">
                 <span class="intro-sub">Timeless Staples</span>
@@ -145,7 +174,8 @@
             </div>
         </div>
     </section>
-    
+
+
     <!-- Categories -->
     <div class="category-section-intro">
         <span class="intro-sub">The Edit</span>
@@ -168,42 +198,19 @@
 
         <div class="editorial-category-row row-inverted">
             <div class="cat-image-wrapper">
-                <img src="3.png" alt="Premium Linen Essentials" class="cat-display-img">
+                <img src="5.png" alt="Dress" class="cat-display-img">
             </div>
             <div class="cat-info-wrapper">
                 <span class="cat-count"></span>
-                <h3 class="cat-title">Premium Linen</h3>
+                <h3 class="cat-title">Dress</h3>
                 <p class="cat-description"></p>
-                <a href="collections.html?category=premium-linen" class="cat-action-link-btn">View Essentials</a>
+                <a href="collections.html?category=dress" class="cat-action-link-btn">View Essentials</a>
             </div>
         </div>
 
         <div class="editorial-category-row">
             <div class="cat-image-wrapper">
-                <img src="2.jpg" alt="Artisanal Kurtas" class="cat-display-img">
-            </div>
-            <div class="cat-info-wrapper">
-                <span class="cat-count"></span>
-                <h3 class="cat-title">Artisanal Kurtas</h3>
-                <p class="cat-description"></p>
-                <a href="collections.html?category=artisanal-kurtas" class="cat-action-link-btn">Shop Kurtas</a>
-            </div>
-        </div>
-
-        <div class="editorial-category-row row-inverted">
-            <div class="cat-image-wrapper">
-                <img src="5.png" alt="Resort & Lounge Luxury" class="cat-display-img">
-            </div>
-            <div class="cat-info-wrapper">
-                <span class="cat-count"></span>
-                <h3 class="cat-title">Resort & Lounge</h3>
-                <p class="cat-description"></p>
-                <a href="collections.html?category=resort-lounge" class="cat-action-link-btn">Discover Lounge</a>
-            </div>
-        </div>
-        <div class="editorial-category-row">
-            <div class="cat-image-wrapper">
-                <img src="2.jpg" alt="Artisanal Kurtas" class="cat-display-img">
+                <img src="dupatta.png" alt="Handloom stoles and Dupatta" class="cat-display-img">
             </div>
             <div class="cat-info-wrapper">
                 <span class="cat-count"></span>
@@ -212,30 +219,40 @@
                 <a href="collections.html?category=handloom-dupatta" class="cat-action-link-btn">Check fits</a>
             </div>
         </div>
+
     </section>
+
 
     <section class="brand-values-section">
         <div class="values-grid">
+            <!-- Card 1: Crafted with Intention -->
             <div class="value-card">
                 <span class="value-icon">✦</span>
-                <h4 class="value-title">Artisanal & Slow</h4>
-                <p class="value-text">We reject mass production. Every garment is cut and stitched patiently,
-                    honoring
-                    the natural rhythm of human hands.</p>
+                <h4 class="value-title">Crafted with Intention</h4>
+                <p class="value-text">
+                    Every Urban Sanskar piece is thoughtfully made in small batches using natural fabrics.
+                    We believe clothing should be worn, loved, and lived in—not mass produced.
+                </p>
             </div>
+
+            <!-- Card 2: Everyday Comfort -->
             <div class="value-card">
                 <span class="value-icon">✦</span>
-                <h4 class="value-title">100% Organic Linen</h4>
-                <p class="value-text">Sourced directly from certified ethical farms. Breathable, raw textures that
-                    get
-                    softer and more beautiful with every single wash.</p>
+                <h4 class="value-title">Everyday Comfort</h4>
+                <p class="value-text">
+                    From breathable cottons to handloom weaves, every fabric is chosen for its softness,
+                    durability, and comfort. Designed to feel lighter with every wear and gentler with every wash.
+                </p>
             </div>
+
+            <!-- Card 3: Made Mindfully -->
             <div class="value-card">
                 <span class="value-icon">✦</span>
-                <h4 class="value-title">Conscious Footprint</h4>
-                <p class="value-text">From biodegradable threads to plastic-free cornstarch packaging, our devotion
-                    to
-                    Mother Earth is absolute.</p>
+                <h4 class="value-title">Made Mindfully</h4>
+                <p class="value-text">
+                    We create only what is needed, reducing excess and waste. Thoughtful production,
+                    minimal packaging, and timeless designs are our way of caring for both people and the planet.
+                </p>
             </div>
         </div>
     </section>
@@ -248,20 +265,26 @@
                 and private collection previews.</p>
 
             <div class="newsletter-action-box">
-                 <a href="https://wa.me/919746539916?text=Hi%20Urban%20Sanskar,%20I%20want%20to%20subscribe%20to%20your%20journal%20and%20latest%20collection%20updates."
-                    target="_blank" class="news-submit-btn" style="text-decoration: none; display: inline-block; text-align: center;">
+                <!-- <a href="YOUR_WHATSAPP_CHANNEL_LINK" target="_blank" class="news-submit-btn"
+                    style="text-decoration: none; display: inline-block; text-align: center;">
+                    Join WhatsApp Channel
+                </a> -->
+                <a href="https://wa.me/919746539916?text=Hi%20Urban%20Sanskar,%20I%20want%20to%20subscribe%20to%20your%20journal%20and%20latest%20collection%20updates."
+                    target="_blank" class="news-submit-btn"
+                    style="text-decoration: none; display: inline-block; text-align: center;">
                     Join WhatsApp Channel
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="main-footer">
+    <footer class=" main-footer">
         <div class="footer-grid">
 
             <div class="footer-col-block brand-brief">
                 <h2 class="footer-brand-name">URBAN SANSKAR</h2>
-                <p class="footer-tagline">Rooted in simplicity, crafted meticulously for the modern conscious mind.
+                <p class="footer-tagline">Rooted in simplicity, crafted meticulously for the modern
+                    conscious mind.
                 </p>
 
                 <div class="footer-social-icons">
@@ -300,9 +323,7 @@
                     <li><a href="collections.html">All Collections</a></li>
                     <!-- Query parameters added to the links -->
                     <li><a href="collections.html?category=coord-sets">Co-ord Sets</a></li>
-                    <li><a href="collections.html?category=premium-linen">Premium Linen</a></li>
-                    <li><a href="collections.html?category=artisanal-kurtas">Artisanal Kurtas</a></li>
-                    <li><a href="collections.html?category=resort-lounge">Resort & Lounge</a></li>
+                    <li><a href="collections.html?category=dress">Dress</a></li>
                     <li><a href="collections.html?category=handloom-dupatta">Handloom Stoles & Dupatta</a></li>
                 </ul>
             </div>
@@ -310,7 +331,7 @@
             <div class="footer-col-block">
                 <h5 class="footer-col-title">Our World</h5>
                 <ul class="footer-links-list">
-                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="about.html">About us</a></li>
                     <li><a href="our-world.html#artisans">Artisan Welfare</a></li>
                     <li><a href="our-world.html#sustainability">Sustainability Report</a></li>
                     <li><a href="our-world.html#journal">Journal / Blog</a></li>
