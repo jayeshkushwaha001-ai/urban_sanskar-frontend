@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             } else {
                 checkoutBtn.disabled = false;
                 checkoutBtn.textContent = "Proceed To Checkout";
-                checkoutBtn.style.background = "#000000";
+                checkoutBtn.style.background = "#a3b19b";
                 checkoutBtn.style.cursor = "pointer";
             }
         }
