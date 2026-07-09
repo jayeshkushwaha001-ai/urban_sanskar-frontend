@@ -1,5 +1,6 @@
 // Dono files (app.js aur admin.js) me ye badal do:
 const API_BASE_URL = "https://urban-sanskar-backend.onrender.com";
+
 // --- EXISTING NAVBAR DRAWER ACTIONS CODE ---
 document.addEventListener('DOMContentLoaded', () => {
     const openMenuBtn = document.getElementById('menu-open-btn');
@@ -51,27 +52,39 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- UNIVERSAL HORIZONTAL SCROLL ENGINE ---
-const sliderTrack = document.getElementById('product-slider-track') || document.getElementById('rec-slider-track');
-const leftArrow = document.getElementById('slide-left-btn');
-const rightArrow = document.getElementById('slide-right-btn');
+function initializeSlider(trackId, leftBtnId, rightBtnId) {
+    const sliderTrack = document.getElementById(trackId);
+    const leftArrow = document.getElementById(leftBtnId);
+    const rightArrow = document.getElementById(rightBtnId);
 
-if (sliderTrack && leftArrow && rightArrow) {
-    const getScrollAmount = () => {
-        const firstCard = sliderTrack.querySelector('.product-card');
-        return firstCard ? firstCard.clientWidth + 24 : 320;
-    };
+    if (sliderTrack && leftArrow && rightArrow) {
+        const getScrollAmount = () => {
+            const firstCard = sliderTrack.querySelector('.product-card');
+            return firstCard ? firstCard.clientWidth + 24 : 320;
+        };
 
-    rightArrow.addEventListener('click', () => {
-        sliderTrack.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-    });
+        rightArrow.addEventListener('click', () => {
+            sliderTrack.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        });
 
-    leftArrow.addEventListener('click', () => {
-        sliderTrack.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-    });
+        leftArrow.addEventListener('click', () => {
+            sliderTrack.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        });
+    }
 }
 
+// 🚀 1. NEW ARRIVALS SLIDER INITIALIZATION
+initializeSlider('new-arrivals-track', 'arrival-slide-left-btn', 'arrival-slide-right-btn');
+
+// 🚀 2. BEST SELLERS SLIDER INITIALIZATION
+initializeSlider('product-slider-track', 'slide-left-btn', 'slide-right-btn');
+
+// 🚀 3. RECOMMENDATIONS SLIDER INITIALIZATION (Baaki pages ke liye)
+initializeSlider('rec-slider-track', 'slide-left-btn', 'slide-right-btn');
+
+
 // ==========================================================================
-// 🔥 NEW DYNAMIC API DATA FETCH ENGINE (No More Hardcoded Object!)
+// 🔥 DYNAMIC API DATA FETCH ENGINE
 // ==========================================================================
 
 // 1. DYNAMIC DETAIL INJECTOR (For product-detail.html)
@@ -79,7 +92,6 @@ async function loadProductDetails(productId) {
     if (!productId) return;
 
     try {
-        // Backend API se single product ka data mango
         const res = await fetch(`${API_BASE_URL}/api/products/${productId}`);
         const data = await res.json();
 
@@ -90,7 +102,6 @@ async function loadProductDetails(productId) {
 
         const product = data.product;
 
-        // DOM elements ko update karo
         const titleEl = document.getElementById('dyn-title');
         if (!titleEl) return;
 
@@ -99,9 +110,8 @@ async function loadProductDetails(productId) {
         document.getElementById('dyn-desc').innerText = product.desc;
         document.title = `${product.title} | Urban Sanskar`;
 
-        // Specs Mapping (Synced with naye Schema keys)
         if (document.getElementById('dyn-collection')) {
-            document.getElementById('dyn-collection').innerText = product.collectionTag || "Summer 26. (latest)";
+            document.getElementById('dyn-collection').innerText = product.collectionTag;
         }
         if (document.getElementById('dyn-fabric')) {
             document.getElementById('dyn-fabric').innerText = product.fabric || "100% Certified Organic Premium Linen";
@@ -113,26 +123,23 @@ async function loadProductDetails(productId) {
             document.getElementById('dyn-details').innerText = product.details || "Minimalist Tailoring";
         }
 
-        // Main Stage Image Load karo
         const stageImg = document.getElementById('stage-display-img');
         if (stageImg && product.images && product.images.length > 0) {
             stageImg.src = product.images[0].replace("/upload/", "/upload/f_auto,q_auto,w_800/");
         }
 
-        // Thumbnails update karo layout ke hisab se
         const thumbs = document.querySelectorAll('.thumb-img');
         thumbs.forEach((thumb, index) => {
             if (product.images && product.images[index]) {
                 thumb.src = product.images[index];
-                thumb.style.display = "block"; // Ensure visible hain
+                thumb.style.display = "block";
                 if (index === 0) thumb.classList.add('active');
                 else thumb.classList.remove('active');
             } else {
-                thumb.style.display = "none"; // Agar 4 se kam images hain toh baaki chhupa do
+                thumb.style.display = "none";
             }
         });
 
-        // Recommendations dynamically refresh karo category ke base par
         generateRecommendations(product.category, product._id);
 
     } catch (err) {
@@ -155,7 +162,6 @@ async function generateRecommendations(currentCategory, currentProductId) {
 
         let matchCount = 0;
 
-        // Pehle same category wale items filter karo
         data.products.forEach(product => {
             if (product.category === currentCategory && product._id !== currentProductId) {
                 matchCount++;
@@ -163,7 +169,6 @@ async function generateRecommendations(currentCategory, currentProductId) {
             }
         });
 
-        // Fallback: Agar same category ka koi aur product na mile, toh baaki koi bhi dikha do
         if (matchCount === 0) {
             data.products.forEach(product => {
                 if (product._id !== currentProductId) {
@@ -179,7 +184,7 @@ async function generateRecommendations(currentCategory, currentProductId) {
 // 3. HOMEPAGE BEST SELLERS LOADER (For index.html slider)
 async function loadHomepageBestSellers() {
     const homeSliderTrack = document.getElementById('product-slider-track');
-    if (!homeSliderTrack) return; // Agar homepage par nahi hain toh skip karo
+    if (!homeSliderTrack) return;
 
     homeSliderTrack.innerHTML = "";
 
@@ -194,6 +199,27 @@ async function loadHomepageBestSellers() {
         }
     } catch (err) {
         console.error("Best sellers load karne me dikkat aayi:", err);
+    }
+}
+
+// 🌟 3b. NEW ADDITION: HOMEPAGE NEW ARRIVALS LOADER (For index.html slider)
+async function loadHomepageNewArrivals() {
+    const newArrivalsTrack = document.getElementById('new-arrivals-track');
+    if (!newArrivalsTrack) return; // Agar homepage par ye element nahi h toh ruk jao
+
+    newArrivalsTrack.innerHTML = "";
+
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/products/newarrivals`);
+        const data = await res.json();
+
+        if (data.success && data.products) {
+            data.products.forEach(product => {
+                newArrivalsTrack.innerHTML += createCardHTML(product);
+            });
+        }
+    } catch (err) {
+        console.error("New arrivals load karne me dikkat aayi:", err);
     }
 }
 
@@ -223,10 +249,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
 
-    // Agar URL me ID hai toh Detail Page load karo, nahi toh Homepage Slider load karo
     if (productId) {
         loadProductDetails(productId);
     } else {
+        // 🔥 Dono loaders safely side-by-side call ho rhe hain homepage par
+        loadHomepageNewArrivals();
         loadHomepageBestSellers();
     }
 
