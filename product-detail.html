@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classic Ivory Co-ord Set | Urban Sanskar</title>
+    <title>Product details | Urban Sanskar</title>
     <!-- Standard CSS Stylesheet Linking -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -35,7 +35,7 @@
             <nav class="desktop-nav">
                 <a href="index.html" class="nav-link">Shop</a>
                 <a href="collections.html" class="nav-link">All Collections</a>
-                <a href="about.html" class="nav-link">Our Story</a>
+                <a href="about.html" class="nav-link">About us</a>
             </nav>
         </div>
 
@@ -83,7 +83,7 @@
         <nav class="drawer-links-box">
             <a href="index.html" class="drawer-link">Shop</a>
             <a href="collections.html" class="drawer-link">All Collections</a>
-            <a href="about.html" class="drawer-link">Our Story</a>
+            <a href="about.html" class="drawer-link">About us</a>
             <a href="shipping-returns.html" class="drawer-link">Shipping & Returns</a>
             <a href="size-guide.html" class="drawer-link">Size Guide</a>
         </nav>
@@ -93,12 +93,12 @@
     </div>
 
 
+
     <!-- Main Product Presentation Workspace -->
     <main class="product-detail-container">
 
         <div class="product-gallery-wing">
-            <div class="thumbnail-stack" id="dyn-thumbnail-stack">
-            </div>
+            <div class="thumbnail-stack" id="dyn-thumbnail-stack"></div>
             <div class="main-stage-frame">
                 <img src="" alt="Product Display" id="stage-display-img" style="object-fit: cover;">
             </div>
@@ -106,10 +106,7 @@
 
         <div class="product-info-panel-wing">
 
-            <span class="panel-collection-tag" id="dyn-collection"
-                style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #888; display: block; margin-bottom: 6px;">
-                Loading...
-            </span>
+            <span class="panel-collection-tag" id="dyn-collection">Loading...</span>
 
             <h1 class="panel-product-title" id="dyn-title">Loading Product Details...</h1>
 
@@ -120,50 +117,59 @@
 
             <hr class="fine-separator">
 
-            <p class="panel-description" id="dyn-desc"
-                style="line-height: 1.6; color: #333; margin-bottom: 24px; font-style: normal;"></p>
-
+            <!-- Size Selection System -->
             <div class="size-selector-zone">
                 <div class="size-zone-header">
                     <span class="selector-label">Select Size</span>
                     <button class="size-guide-trigger-btn" id="sizeGuideBtn">Size Guide</button>
                 </div>
                 <div class="size-options-wrapper" id="dyn-size-wrapper">
+                    <!-- Dynamic sizes will render here -->
                 </div>
             </div>
 
+            <!-- Premium Colored Action Buttons -->
             <div class="purchase-action-system">
-                <button class="action-btn-bag btn-outline-dark" id="add-to-bag-btn">Add To Bag</button>
-                <button class="action-btn-checkout btn-solid-dark" id="buy-now-btn">Buy It Now</button>
+                <button class="action-btn-bag" id="add-to-bag-btn">Add To Bag</button>
+                <button class="action-btn-checkout" id="buy-now-btn">Buy It Now</button>
             </div>
 
-            <div class="specs-accordion-block" style="margin-top: 28px;">
+            <!-- Clean Interactive Accordions -->
+            <div class="specs-accordion-block">
 
-                <details open style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
-                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
-                        Product Specifications
+                <!-- 🔥 FIX: Description Moved Inside Accordion Toggle (Keep Open by default if you want, or remove 'open' to keep closed) -->
+                <details class="premium-accordion-item">
+                    <summary class="accordion-trigger">
+                        Description
+                        <span class="accordion-icon"></span>
                     </summary>
-                    <div class="accordion-inner-content"
-                        style="padding: 10px 0 4px 0; line-height: 1.7; color: #444; font-size: 0.95rem;">
-                        <p style="margin: 0 0 6px 0; font-style:normal;"><strong>Fabric:</strong> <span
-                                id="dyn-fabric">-</span></p>
-                        <p style="margin: 0 0 6px 0; font-style:normal;"><strong>Fit:</strong> <span
-                                id="dyn-fit">-</span></p>
-                        <p style="margin: 0; font-style: normal;"><strong>Details:</strong> <span
-                                id="dyn-details">-</span></p>
+                    <div class="accordion-inner-content">
+                        <p class="panel-description" id="dyn-desc"></p>
                     </div>
                 </details>
 
-                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
-                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
-                        Wash and Care
+                <!-- Product Specifications -->
+                <details class="premium-accordion-item">
+                    <summary class="accordion-trigger">
+                        Product Specifications
+                        <span class="accordion-icon"></span>
                     </summary>
-                    <div class="accordion-inner-content"
-                        style="padding: 10px 0 4px 0; color: #444; font-size: 0.95rem;">
-                        <p style="margin: 0 0 10px 0; font-style:normal; color: #666; font-size: 0.9rem;">
-                            Treat your garment with care to enjoy it for years.
-                        </p>
-                        <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                    <div class="accordion-inner-content">
+                        <p><strong>Fabric:</strong> <span id="dyn-fabric"></span></p>
+                        <p><strong>Fit:</strong> <span id="dyn-fit"></span></p>
+                        <p><strong>Details:</strong> <span id="dyn-details"></span></p>
+                    </div>
+                </details>
+
+                <!-- Wash and Care -->
+                <details class="premium-accordion-item">
+                    <summary class="accordion-trigger">
+                        Wash and Care
+                        <span class="accordion-icon"></span>
+                    </summary>
+                    <div class="accordion-inner-content">
+                        <p class="wash-care-intro">Treat your garment with care to enjoy it for years.</p>
+                        <ul class="wash-care-list">
                             <li>Cold hand wash separately.</li>
                             <li>Mild detergent only.</li>
                             <li>Dry in shade.</li>
@@ -173,8 +179,8 @@
                     </div>
                 </details>
 
-                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
-                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
+                <details class="premium-accordion-item">
+                    <summary class="accordion-trigger">
                         Size & Customisation
                     </summary>
                     <div class="accordion-inner-content"
@@ -208,9 +214,8 @@
                     </div>
                 </details>
 
-                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
-                    <summary
-                        style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em; display: flex; justify-content: space-between; align-items: center;">
+                <details class="premium-accordion-item">
+                    <summary class="accordion-trigger">
                         <span>Dispatch & Delivery</span>
                     </summary>
                     <div class="accordion-inner-content"
@@ -238,9 +243,8 @@
                     </div>
                 </details>
 
-                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
-                    <summary
-                        style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em; display: flex; justify-content: space-between; align-items: center;">
+                <details class="premium-accordion-item">
+                    <summary class="accordion-trigger">
                         <span>Returns & Exchanges</span>
                         <span
                             style="background: #111; color: #fff; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; font-weight: 700; border-radius: 1px;">Strict
@@ -268,8 +272,8 @@
                     </div>
                 </details>
 
-                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
-                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
+                <details class="premium-accordion-item">
+                    <summary class="accordion-trigger">
                         Damaged or Defective Items
                     </summary>
                     <div class="accordion-inner-content"
@@ -287,8 +291,8 @@
                     </div>
                 </details>
 
-                <details style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 12px;">
-                    <summary style="font-weight: 600; cursor: pointer; padding: 6px 0; letter-spacing: 0.02em;">
+                <details class="premium-accordion-item">
+                    <summary class="accordion-trigger">
                         Important Notes
                     </summary>
                     <div class="accordion-inner-content"
@@ -339,12 +343,13 @@
         </div>
     </section>
 
-    <footer class="main-footer">
+    <footer class=" main-footer">
         <div class="footer-grid">
 
             <div class="footer-col-block brand-brief">
                 <h2 class="footer-brand-name">URBAN SANSKAR</h2>
-                <p class="footer-tagline">Rooted in simplicity, crafted meticulously for the modern conscious mind.
+                <p class="footer-tagline">Rooted in simplicity, crafted meticulously for the modern
+                    conscious mind.
                 </p>
 
                 <div class="footer-social-icons">
@@ -383,9 +388,7 @@
                     <li><a href="collections.html">All Collections</a></li>
                     <!-- Query parameters added to the links -->
                     <li><a href="collections.html?category=coord-sets">Co-ord Sets</a></li>
-                    <li><a href="collections.html?category=premium-linen">Premium Linen</a></li>
-                    <li><a href="collections.html?category=artisanal-kurtas">Artisanal Kurtas</a></li>
-                    <li><a href="collections.html?category=resort-lounge">Resort & Lounge</a></li>
+                    <li><a href="collections.html?category=dress">Dress</a></li>
                     <li><a href="collections.html?category=handloom-dupatta">Handloom Stoles & Dupatta</a></li>
                 </ul>
             </div>
@@ -393,7 +396,7 @@
             <div class="footer-col-block">
                 <h5 class="footer-col-title">Our World</h5>
                 <ul class="footer-links-list">
-                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="about.html">About us</a></li>
                     <li><a href="our-world.html#artisans">Artisan Welfare</a></li>
                     <li><a href="our-world.html#sustainability">Sustainability Report</a></li>
                     <li><a href="our-world.html#journal">Journal / Blog</a></li>
@@ -421,7 +424,7 @@
             </p>
         </div>
     </footer>
-    
+
     <!-- ========================================== -->
     <!-- SMART SIZE GUIDE MODAL (MOBILE FRIENDLY) -->
     <!-- ========================================== -->
