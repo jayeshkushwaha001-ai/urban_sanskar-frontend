@@ -378,6 +378,7 @@ function openEditModal(productId) {
                             <option value="">Select Category</option>
                             <option value="coord-sets" ${product.category === 'coord-sets' ? 'selected' : ''}>Co-ord Sets</option>
                             <option value="dress" ${product.category === 'dress' ? 'selected' : ''}>Dress</option>
+                            <option value="hand-series" ${product.category === 'hand-series' ? 'selected' : ''}>Hand Painted Series</option>
                             <option value="handloom-dupatta" ${product.category === 'handloom-dupatta' ? 'selected' : ''}>Handloom Stoles & Dupatta</option>
                         </select>
                     </div>
