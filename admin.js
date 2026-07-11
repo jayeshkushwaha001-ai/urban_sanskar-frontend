@@ -250,7 +250,7 @@ async function fetchLiveOrders() {
                             ${address.street || ''}, ${address.city || ''}, ${address.state || ''} - <strong>${address.pincode || ''}</strong>
                         </p>
                     </div>
-                    <div class="order-row" style="margin-top:10px; border-top:1px solid #eee; padding-top:10px; display:flex; justify-content:space-between; align-items:baseline;">
+                    <div class="order-row" style="margin-top:10px; border-top:1px solid #eee; padding-top:10px; display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px;">
                         <span style="color:#666; font-size:0.85rem;">Items: ₹${pricing.subTotal || 0} | Delivery: ₹${pricing.shippingCharges || 0}</span>
                         <span style="font-weight:800; font-size:1.15rem; color:#111;">Total Bill: ₹${pricing.totalAmount ? pricing.totalAmount.toLocaleString('en-IN') : 0}</span>
                     </div>
@@ -282,8 +282,8 @@ async function fetchAdminProducts() {
             const isNewArrivalVal = p.isNewArrival || false;
 
             return `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px; flex: 1; min-width: 250px;">
                         <img src="${p.images && p.images[0] ? p.images[0] : 'https://via.placeholder.com/50'}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
                         <div>
                             <p style="font-weight: 700; margin: 0; color: #111;">
@@ -356,7 +356,7 @@ function openEditModal(productId) {
     modalDiv.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 10000; font-family: sans-serif; padding: 15px; box-sizing: border-box;";
 
     modalDiv.innerHTML = `
-        <div style="background: #fff; width: 100%; max-width: 550px; max-height: 90vh; overflow-y: auto; border-radius: 12px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative;">
+        <div style="background: #fff; width: 100%; max-width: 550px; max-height: 90vh; overflow-y: auto; border-radius: 12px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; box-sizing: border-box;">
             <button onclick="closeEditModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">&times;</button>
             <h3 style="margin-top: 0; color: #111; font-weight: 800; border-bottom: 2px solid #eee; padding-bottom: 10px; text-transform: uppercase; font-size: 1.2rem;">✏️ Edit Product Details</h3>
             
@@ -366,14 +366,13 @@ function openEditModal(productId) {
                     <input type="text" id="editTitle" value="${product.title}" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
                 </div>
 
-                <div style="display: flex; gap: 10px;">
-                    <div style="flex: 1;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 120px;">
                         <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">PRICE (₹)</label>
                         <input type="number" id="editPrice" value="${product.price}" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
                     </div>
-                    <div style="flex: 1;">
+                    <div style="flex: 1; min-width: 180px;">
                         <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">CATEGORY</label>
-                        <!-- 🔥 DYNAMIC CATEGORY LOGIC FIXED TO MATCH YOUR EXACT HTML OPTIONS -->
                         <select id="editCategory" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
                             <option value="">Select Category</option>
                             <option value="coord-sets" ${product.category === 'coord-sets' ? 'selected' : ''}>Co-ord Sets</option>
@@ -400,12 +399,12 @@ function openEditModal(productId) {
                     <textarea id="editDesc" rows="2" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box; resize: vertical;">${product.desc || ''}</textarea>
                 </div>
 
-                <div style="display: flex; gap: 10px;">
-                    <div style="flex: 1;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 140px;">
                         <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">FABRIC</label>
                         <input type="text" id="editFabric" value="${product.fabric || ''}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
                     </div>
-                    <div style="flex: 1;">
+                    <div style="flex: 1; min-width: 140px;">
                         <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">FIT</label>
                         <input type="text" id="editFit" value="${product.fit || ''}" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
                     </div>
@@ -505,9 +504,9 @@ async function handleEditFormSubmit(e, id) {
 // UI Tweak Logic if token missing
 function showLoginUI() {
     document.body.innerHTML = `
-        <div style="display:flex; justify-content:center; align-items:center; height:100vh; background:#111; font-family:sans-serif;">
-            <form id="adminLoginForm" style="background:#fff; padding:30px; border-radius:12px; width:320px; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
-                <h2 style="margin-top:0; text-align:center; color:#111; font-weight:800;">URBAN SANSKAR</h2>
+        <div style="display:flex; justify-content:center; align-items:center; height:100vh; background:#111; font-family:sans-serif; padding:15px; box-sizing:border-box;">
+            <form id="adminLoginForm" style="background:#fff; padding:30px; border-radius:12px; width:100%; max-width:340px; box-shadow:0 10px 25px rgba(0,0,0,0.3); box-sizing:border-box;">
+                <h2 style="margin-top:0; text-align:center; color:#111; font-weight:800; font-size:1.5rem;">URBAN SANSKAR</h2>
                 <p style="text-align:center; color:#666; font-size:0.85rem; margin-bottom:20px;">Secure Admin Gateway</p>
                 
                 <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:5px; color:#333;">EMAIL ADDRESS</label>
