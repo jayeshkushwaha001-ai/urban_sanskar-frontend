@@ -4,7 +4,7 @@ let collectionsProductsList = [];
 // 2. SAFELY EXECUTE ENGINE ONCE DOM IS READY
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // 🔥 FIX: API_BASE_URL ko global se hata kar is block ke andar daal diya!
+    // 🔥 API_BASE_URL ko global se hata kar is block ke andar daal diya!
     // Isse app.js waale variable se iska koi lafda nahi hoga.
     const API_BASE_URL = "https://urban-sanskar-backend.onrender.com";
 
@@ -30,6 +30,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             // 🔥 STEP 2 FIX: Check if product is sold out
             const isSoldOut = product.isSoldOut === true;
 
+            // ✨ NEW FIX: Check if product is on SALE (MRP vs Selling Price)
+            const isOnSale = product.mrpPrice && product.mrpPrice > product.price;
+            
+            // Dynamic price string compilation
+            const priceDisplay = isOnSale 
+                ? `<span style="text-decoration: line-through; color: #999; margin-right: 8px; font-size: 0.85rem; font-weight: normal;">₹${product.mrpPrice.toLocaleString('en-IN')}</span><span style="font-weight: 700; color: #111;">₹${product.price.toLocaleString('en-IN')}</span>`
+                : `₹${product.price.toLocaleString('en-IN')}`;
+
             // Sold Out Ribbon/Overlay Template
             const soldOutOverlay = isSoldOut ? `
                 <div class="sold-out-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; z-index: 3; pointer-events: none;">
@@ -47,8 +55,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                     <div class="product-card-meta-details" style="${isSoldOut ? 'color: #888;' : ''}">
                         <h3 class="product-item-title">${product.title}</h3>
-                        <div class="product-item-price-row">
-                            ₹${product.price.toLocaleString('en-IN')}
+                        <div class="product-item-price-row" style="display: flex; align-items: center; wrap: nowrap;">
+                            ${priceDisplay}
                             ${isSoldOut ? `<span style="font-size: 0.75rem; color: #cc0000; margin-left: 8px; font-weight: 500;">[Out of Stock]</span>` : ''}
                         </div>
                     </div>
