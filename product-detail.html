@@ -94,45 +94,53 @@
 
 
 
-    <!-- Main Product Presentation Workspace -->
-    <main class="product-detail-container">
+<main class="product-detail-container">
 
-        <div class="product-gallery-wing">
-            <div class="thumbnail-stack" id="dyn-thumbnail-stack"></div>
-            <div class="main-stage-frame">
-                <img src="" alt="Product Display" id="stage-display-img" style="object-fit: cover;">
+    <div class="product-gallery-wing">
+        <!-- 🛠️ FIX: 4 placeholder images add kiye hain .thumb-img class ke saath, taaki app.js inko loop karke fill kar sake -->
+        <div class="thumbnail-stack" id="dyn-thumbnail-stack">
+        </div>
+        <div class="main-stage-frame">
+            <img src="" alt="Product Display" id="stage-display-img" style="object-fit: cover;">
+        </div>
+    </div>
+
+    <div class="product-info-panel-wing">
+
+        <span class="panel-collection-tag" id="dyn-collection">Loading...</span>
+
+        <h1 class="panel-product-title" id="dyn-title">Loading Product Details...</h1>
+
+        <!-- 🛠️ Price Row perfectly ready hai app.js ke innerHTML inject karne ke liye -->
+        <div class="panel-price-row">
+            <span class="current-price" id="dyn-price">₹0</span>
+            <span class="tax-disclaimer">Inclusive of all taxes</span>
+        </div>
+
+        <hr class="fine-separator">
+
+        <!-- Size Selection System -->
+        <div class="size-selector-zone">
+            <div class="size-zone-header">
+                <span class="selector-label">Select Size</span>
+                <button class="size-guide-trigger-btn" id="sizeGuideBtn">Size Guide</button>
+            </div>
+            
+            <!-- 🛠️ FIX: Standard size chips buttons .size-chip-btn class ke saath inject kiye hain taaki app.js ka live switching logic chal sake -->
+            <div class="size-options-wrapper" id="dyn-size-wrapper">
+                <button class="size-chip-btn">S</button>
+                <button class="size-chip-btn active">M</button>
+                <button class="size-chip-btn">L</button>
+                <button class="size-chip-btn">XL</button>
+                <button class="size-chip-btn">XXL</button>
             </div>
         </div>
 
-        <div class="product-info-panel-wing">
-
-            <span class="panel-collection-tag" id="dyn-collection">Loading...</span>
-
-            <h1 class="panel-product-title" id="dyn-title">Loading Product Details...</h1>
-
-            <div class="panel-price-row">
-                <span class="current-price" id="dyn-price">₹0</span>
-                <span class="tax-disclaimer">Inclusive of all taxes</span>
-            </div>
-
-            <hr class="fine-separator">
-
-            <!-- Size Selection System -->
-            <div class="size-selector-zone">
-                <div class="size-zone-header">
-                    <span class="selector-label">Select Size</span>
-                    <button class="size-guide-trigger-btn" id="sizeGuideBtn">Size Guide</button>
-                </div>
-                <div class="size-options-wrapper" id="dyn-size-wrapper">
-                    <!-- Dynamic sizes will render here -->
-                </div>
-            </div>
-
-            <!-- Premium Colored Action Buttons -->
-            <div class="purchase-action-system">
-                <button class="action-btn-bag" id="add-to-bag-btn">Add To Bag</button>
-                <button class="action-btn-checkout" id="buy-now-btn">Buy It Now</button>
-            </div>
+        <!-- Premium Colored Action Buttons -->
+        <div class="purchase-action-system">
+            <button class="action-btn-bag" id="add-to-bag-btn">Add To Bag</button>
+            <button class="action-btn-checkout" id="buy-now-btn">Buy It Now</button>
+        </div>
 
             <!-- Clean Interactive Accordions -->
             <div class="specs-accordion-block">
