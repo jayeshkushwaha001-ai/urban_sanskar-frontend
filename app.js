@@ -1,4 +1,3 @@
-// Dono files (app.js aur admin.js) me ye badal do:
 const API_BASE_URL = "https://urban-sanskar-backend.onrender.com";
 
 // --- EXISTING NAVBAR DRAWER ACTIONS CODE ---
@@ -106,7 +105,20 @@ async function loadProductDetails(productId) {
         if (!titleEl) return;
 
         titleEl.innerText = product.title;
-        document.getElementById('dyn-price').innerText = `₹${product.price.toLocaleString('en-IN')}`;
+
+        // ✨ FIX: Main Product detail page par dynamic Sale price check
+        const priceEl = document.getElementById('dyn-price');
+        if (priceEl) {
+            if (product.mrpPrice && product.mrpPrice > product.price) {
+                priceEl.innerHTML = `
+                    <span style="text-decoration: line-through; color: #888; margin-right: 12px; font-weight: 400; font-size: 1.1rem;">₹${product.mrpPrice.toLocaleString('en-IN')}</span>
+                    <span style="color: #111; font-weight: 800;">₹${product.price.toLocaleString('en-IN')}</span>
+                `;
+            } else {
+                priceEl.innerHTML = `₹${product.price.toLocaleString('en-IN')}`;
+            }
+        }
+
         document.getElementById('dyn-desc').innerText = product.desc;
         document.title = `${product.title} | Urban Sanskar`;
 
@@ -205,7 +217,7 @@ async function loadHomepageBestSellers() {
 // 🌟 3b. NEW ADDITION: HOMEPAGE NEW ARRIVALS LOADER (For index.html slider)
 async function loadHomepageNewArrivals() {
     const newArrivalsTrack = document.getElementById('new-arrivals-track');
-    if (!newArrivalsTrack) return; // Agar homepage par ye element nahi h toh ruk jao
+    if (!newArrivalsTrack) return;
 
     newArrivalsTrack.innerHTML = "";
 
@@ -225,6 +237,14 @@ async function loadHomepageNewArrivals() {
 
 // Helper Function: Card HTML Generator (MongoDB `_id` compatible)
 function createCardHTML(product) {
+    // 🔥 FIX: Check properties if product is actually on SALE
+    const isOnSale = product.mrpPrice && product.mrpPrice > product.price;
+
+    // Dynamic price string compilation
+    const priceDisplay = isOnSale
+        ? `<span style="text-decoration: line-through; color: #999; margin-right: 8px; font-size: 0.85rem; font-weight: normal;">₹${product.mrpPrice.toLocaleString('en-IN')}</span><span style="font-weight: 700; color: #111;">₹${product.price.toLocaleString('en-IN')}</span>`
+        : `₹${product.price.toLocaleString('en-IN')}`;
+
     return `
         <div onclick="redirectFromRecs('${product._id}')" class="product-card" style="cursor:pointer;">
             <div class="prod-image-holder">
@@ -232,7 +252,7 @@ function createCardHTML(product) {
             </div>
             <div class="prod-details-meta">
                 <h4 class="prod-display-name">${product.title}</h4>
-                <span class="prod-display-price">₹${product.price.toLocaleString('en-IN')}</span>
+                <span class="prod-display-price">${priceDisplay}</span>
             </div>
         </div>
     `;
@@ -257,22 +277,10 @@ document.addEventListener("DOMContentLoaded", () => {
         loadHomepageBestSellers();
     }
 
-    // Live Thumbnail Switching Interaction
-    const thumbnails = document.querySelectorAll('.thumb-img');
-    const stageDisplay = document.getElementById('stage-display-img');
+    // ✂️ NOTE: Live Thumbnail Switching wala static code yahan se hata diya hai, 
+    // kyunki wo ab loadProductDetails ke andar dynamically run hota hai.
 
-    if (thumbnails.length > 0 && stageDisplay) {
-        thumbnails.forEach(thumb => {
-            thumb.addEventListener('click', () => {
-                stageDisplay.src = thumb.src;
-                stageDisplay.alt = thumb.alt;
-                thumbnails.forEach(t => t.classList.remove('active'));
-                thumb.classList.add('active');
-            });
-        });
-    }
-
-    // Size Picker Chips Logic
+    // Size Picker Chips Logic (Kyunki ye HTML me pehle se static maujood hain)
     const sizeChips = document.querySelectorAll('.size-chip-btn');
     if (sizeChips.length > 0) {
         sizeChips.forEach(chip => {
