@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Bag - Urban Sanskar</title>
+    <title>Your Bag | Urban Sanskar</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* ==========================================================================
@@ -110,7 +110,7 @@
         .btn-checkout {
             width: 100%;
             padding: 16px;
-            background:#a3b19b;
+            background: #a3b19b;
             color: #fff;
             border: none;
             font-size: 0.9rem;
@@ -276,9 +276,9 @@
     </div>
     </div>
 
-
     <div class="cart-page-container">
         <div class="cart-items-wrapper">
+            <!-- Dynamic cart items code through JS -->
         </div>
 
         <div class="cart-summary-panel">
@@ -288,6 +288,12 @@
             <div class="summary-row">
                 <span>Subtotal</span>
                 <span id="cart-subtotal">₹0</span>
+            </div>
+
+            <!-- 🛠️ NEW ADDITION: Premium Bag Discount/Savings Tracker Row -->
+            <div class="summary-row" id="summary-savings-row" style="display: none; color: #2e7d32; font-weight: 500;">
+                <span>Bag Discount</span>
+                <span id="cart-savings">-₹0</span>
             </div>
 
             <div class="summary-row">
