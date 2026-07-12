@@ -209,7 +209,7 @@
             </div>
         </div>
 
-        <div id="section-add" class="admin-view-section">
+    <div id="section-add" class="admin-view-section">
             <section class="card">
                 <h2 style="font-size: 1.2rem; margin-bottom: 20px; font-weight: 800;">Publish New Core Line</h2>
                 <form id="prodForm">
@@ -217,8 +217,12 @@
                     <label>Product Title</label>
                     <input type="text" id="prodTitle" placeholder="e.g., Classic Ivory Co-ord Set" required>
 
-                    <label>Price (INR)</label>
+                    <!-- Price Fields Section -->
+                    <label>Selling Price (INR)</label>
                     <input type="number" id="prodPrice" placeholder="e.g., 4250" required>
+                    
+                    <label>Original MRP (INR) <span style="color: #888; font-size: 0.8rem; font-weight: normal;">(Optional - Fill only if product is on SALE)</span></label>
+                    <input type="number" id="prodMrpPrice" placeholder="e.g., 5200 (Leave blank if no discount)">
 
                     <label>Category</label>
                     <select id="prodCategory" required>
@@ -310,5 +314,4 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
     <script src="admin.js"></script>
 </body>
-
 </html>
