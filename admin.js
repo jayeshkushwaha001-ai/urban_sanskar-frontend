@@ -1,4 +1,4 @@
-// admin.js (Fixed Cloudinary Widget, Dynamic Edit Modal Form & Image Removal Cross Engine)
+// admin.js (Fixed Cloudinary Widget, Dynamic Edit Modal Form, Image Removal & SALE Pricing Engine)
 const API_BASE_URL = "https://urban-sanskar-backend.onrender.com";
 let uploadedImages = [];
 let editUploadedImages = []; // Edit mode ke liye alag se image state tracker
@@ -136,7 +136,7 @@ async function fetchDashboardStats() {
     }
 }
 
-// SUBMIT SYSTEM (Products create karne ke liye)
+// SUBMIT SYSTEM (Products create karne ke liye with MRP Price)
 async function handleProductFormSubmission(e) {
     e.preventDefault();
 
@@ -148,9 +148,12 @@ async function handleProductFormSubmission(e) {
     const rawSizesInput = document.getElementById("prodSizes").value;
     const processedSizesArray = rawSizesInput.split(",").map(size => size.trim().toUpperCase());
 
+    const mrpInputVal = document.getElementById("prodMrpPrice") ? document.getElementById("prodMrpPrice").value : "";
+
     const finalProductPayload = {
         title: document.getElementById("prodTitle").value.trim(),
         price: parseInt(document.getElementById("prodPrice").value),
+        mrpPrice: mrpInputVal ? parseInt(mrpInputVal) : null, // Added MRP Price support
         desc: document.getElementById("prodDesc").value.trim(),
         images: uploadedImages,
         sizes: processedSizesArray,
@@ -262,7 +265,7 @@ async function fetchLiveOrders() {
     }
 }
 
-// SARE PRODUCTS LISTING
+// SARE PRODUCTS LISTING (WITH LIVE SALE PRICING ENGINE VISUALS 🏷️)
 async function fetchAdminProducts() {
     const container = document.getElementById('admin-products-list');
     if (!container) return;
@@ -281,6 +284,14 @@ async function fetchAdminProducts() {
             const isSoldOutVal = p.isSoldOut || false;
             const isNewArrivalVal = p.isNewArrival || false;
 
+            // Check if product is on Sale
+            const isOnSale = p.mrpPrice && p.mrpPrice > p.price;
+
+            // Generate HTML structure for dynamic price listing
+            const priceDisplayHTML = isOnSale
+                ? `<span style="text-decoration: line-through; color: #a1a1a1; font-size:0.85rem; margin-right:6px;">₹${p.mrpPrice.toLocaleString('en-IN')}</span><span style="color:#d93838; font-weight:700;">₹${p.price.toLocaleString('en-IN')}</span>`
+                : `<span>₹${p.price.toLocaleString('en-IN')}</span>`;
+
             return `
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee; flex-wrap: wrap; gap: 12px;">
                     <div style="display: flex; align-items: center; gap: 12px; flex: 1; min-width: 250px;">
@@ -288,11 +299,12 @@ async function fetchAdminProducts() {
                         <div>
                             <p style="font-weight: 700; margin: 0; color: #111;">
                                 ${p.title}
+                                ${isOnSale ? '<span style="background: #e63946; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 6px; text-transform: uppercase;">SALE</span>' : ''}
                                 ${isNewArrivalVal ? '<span style="background: #008000; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 6px; text-transform: uppercase;">NEW ARRIVAL</span>' : ''}
                                 ${isSoldOutVal ? '<span style="background: #ff0000; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 6px; text-transform: uppercase;">SOLD OUT</span>' : ''}
                             </p>
                             <p style="color: #666; font-size: 0.85rem; margin: 2px 0 0 0;">
-                                ₹${p.price.toLocaleString('en-IN')} | 
+                                ${priceDisplayHTML} | 
                                 <span style="text-transform: uppercase; font-size: 0.75rem; background: #ddd; padding: 2px 6px; border-radius: 4px;">${p.category}</span>
                                 ${p.collectionTag ? `| <span style="font-size: 0.75rem; color: #555; font-style: italic;">🏷️ ${p.collectionTag}</span>` : ''}
                             </p>
@@ -344,7 +356,7 @@ function removeEditUploadedImage(index) {
     renderEditImagePreviews();
 }
 
-// 🎨 OPEN DYNAMIC EDIT MODAL FORM (FIXED CATEGORIES SYNCED WITH HTML 💎)
+// 🎨 OPEN DYNAMIC EDIT MODAL FORM (UPDATED WITH DUAL PRICE INTEGRATION 💎)
 function openEditModal(productId) {
     const product = window.allAdminProducts.find(p => p._id === productId);
     if (!product) return alert("Product data mismatch error!");
@@ -367,21 +379,26 @@ function openEditModal(productId) {
                 </div>
 
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 120px;">
-                        <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">PRICE (₹)</label>
+                    <div style="flex: 1; min-width: 100px;">
+                        <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">SELLING PRICE (₹)</label>
                         <input type="number" id="editPrice" value="${product.price}" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
                     </div>
-                    <div style="flex: 1; min-width: 180px;">
-                        <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">CATEGORY</label>
-                        <select id="editCategory" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
-                            <option value="">Select Category</option>
-                            <option value="coord-sets" ${product.category === 'coord-sets' ? 'selected' : ''}>Co-ord Sets</option>
-                            <option value="dress" ${product.category === 'dress' ? 'selected' : ''}>Dress</option>
-                            <option value="hand-series" ${product.category === 'hand-series' ? 'selected' : ''}>Hand Painted Series</option>
-                            <option value="handloom-dupatta" ${product.category === 'handloom-dupatta' ? 'selected' : ''}>Handloom Stoles & Dupatta</option>
-                            <option value="stories" ${product.category === 'stories' ? 'selected' : ''}>Pieces that became stories</option>
-                        </select>
+                    <div style="flex: 1; min-width: 100px;">
+                        <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">ORIGINAL MRP (₹)</label>
+                        <input type="number" id="editMrpPrice" value="${product.mrpPrice || ''}" placeholder="Optional" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
                     </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.8rem; font-weight: 700; color: #333; display: block; margin-bottom: 4px;">CATEGORY</label>
+                    <select id="editCategory" required style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                        <option value="">Select Category</option>
+                        <option value="coord-sets" ${product.category === 'coord-sets' ? 'selected' : ''}>Co-ord Sets</option>
+                        <option value="dress" ${product.category === 'dress' ? 'selected' : ''}>Dress</option>
+                        <option value="hand-series" ${product.category === 'hand-series' ? 'selected' : ''}>Hand Painted Series</option>
+                        <option value="handloom-dupatta" ${product.category === 'handloom-dupatta' ? 'selected' : ''}>Handloom Stoles & Dupatta</option>
+                        <option value="stories" ${product.category === 'stories' ? 'selected' : ''}>Pieces that became stories</option>
+                    </select>
                 </div>
 
                 <div>
@@ -452,7 +469,7 @@ function closeEditModal() {
     editUploadedImages = [];
 }
 
-// 🔄 SAVE DYNAMIC MODAL CHANGES TO LIVE DATABASE PIPELINE
+// 🔄 SAVE DYNAMIC MODAL CHANGES TO LIVE DATABASE PIPELINE (WITH MRP ENGINE)
 async function handleEditFormSubmit(e, id) {
     e.preventDefault();
 
@@ -464,9 +481,12 @@ async function handleEditFormSubmit(e, id) {
     const sizesStr = document.getElementById("editSizes").value;
     const processedSizes = sizesStr.split(',').map(s => s.trim().toUpperCase()).filter(s => s !== "");
 
+    const editMrpVal = document.getElementById("editMrpPrice").value;
+
     const updatedPayload = {
         title: document.getElementById("editTitle").value.trim(),
         price: parseInt(document.getElementById("editPrice").value),
+        mrpPrice: editMrpVal ? parseInt(editMrpVal) : null, // Updated MRP on edit pipeline
         category: document.getElementById("editCategory").value,
         sizes: processedSizes,
         collectionTag: document.getElementById("editTag").value.trim(),
