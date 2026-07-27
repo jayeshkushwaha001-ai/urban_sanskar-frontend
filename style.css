@@ -3329,3 +3329,24 @@ textarea:focus {
     border-color: var(--accent-dark);
 }
 
+/* ==========================================
+   MODEL FACE FOCUS (ONLY HOME & COLLECTION GRID)
+   ========================================== */
+.product-card img,
+.product-item img,
+.collection-grid img,
+.products-grid img,
+.grid-item img {
+    object-fit: cover !important;
+    object-position: top center !important;
+}
+
+/* ==========================================
+   EDITORIAL CATEGORY IMAGES - DESKTOP FACE FOCUS FIX
+   ========================================== */
+@media (min-width: 768px) {
+    .editorial-categories-container .cat-display-img {
+        object-fit: cover !important;
+        object-position: top center !important;
+    }
+}
